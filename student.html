@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Students' Works – MAATRAM ON</title>
+  <meta name="description" content="Students' environmental projects & works supported by MAATRAM ON — gallery, descriptions and downloads." />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            maatramGreen: '#2e7d32',
+            maatramLight: '#a5d6a7'
+          }
+        }
+      }
+    }
+   
+  </script>
+
+  <style>
+    .glass {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(6px);
+    }
+
+    /* Modal / Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 80;
+      background: rgba(2,6,7,0.75);
+      padding: 20px;
+    }
+    .lightbox.show { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 80vh; border-radius: 8px; }
+
+    /* small focus ring for accessibility */
+    .focus-ring:focus { outline: 3px solid rgba(46,125,50,0.45); outline-offset: 3px; }
+
+
+        /* ✨ Glow Light Beams */
+.light-beams {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% -20%, rgba(85,255,150,0.15), transparent 70%),
+              radial-gradient(circle at 20% 10%, rgba(120,255,200,0.12), transparent 70%),
+              radial-gradient(circle at 80% 20%, rgba(50,255,180,0.15), transparent 70%);
+  filter: blur(70px);
+  z-index: -8;
+  animation: beamShift 10s infinite alternate ease-in-out;
+}
+
+@keyframes beamShift {
+  0% { transform: translateY(0px) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-35px) scale(1.1); opacity: 0.8; }
+  100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+}
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 antialiased">
+<canvas id="leafCanvas" class="fixed inset-0 -z-10 pointer-events-none"></canvas>
+
+<!-- Floating Clouds -->
+
+<!-- Glow Light Beams -->
+<div class="light-beams pointer-events-none"></div>
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/70 backdrop-blur-md">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo.jpeg" alt="MAATRAM ON logo" class="w-11 h-11 rounded-full border-2 border-white/10" />
+        <div class="hidden sm:block">
+          <div class="font-bold">MAATRAM ON</div>
+          <div class="text-xs text-green-200">Environmental Trust</div>
+        </div>
+      </a>
+      <div class="hidden md:flex gap-6 text-sm">
+        <a href="index.html" class="hover:text-green-200">Home</a>
+        <a href="projects.html" class="hover:text-green-200">Projects</a>
+        <a href="#students" class="hover:text-green-200">Students' Works</a>
+        <a href="contact.html" class="hover:text-green-200">Contact</a>
+      </div>
+      <div class="md:hidden">
+        <a href="index.html" class="px-3 py-2 rounded-full glass text-xs">Explore</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <main class="pt-28">
+    <section class="text-center px-4 py-12">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-green-300">Students' Works from Colleges</h1>
+      <p class="mt-4 max-w-3xl mx-auto text-slate-300">
+        Showcasing student-led environmental projects supported by MAATRAM ON — practical work, research, and field initiatives that engage youth in ecological restoration and community action.
+      </p>
+    </section>
+
+    <!-- Overview card -->
+    <section class="max-w-5xl mx-auto px-4">
+      <div class="glass p-6 rounded-2xl shadow-md">
+        <div class="grid md:grid-cols-3 gap-4 items-center">
+          <div class="md:col-span-2">
+            <h2 class="text-2xl font-semibold text-green-200">Perur Noyal — Student Field Study & Action</h2>
+            <p class="mt-3 text-slate-200">
+              College students collaborated with MAATRAM ON on river cleanup, biodiversity assessment and public awareness activities.
+              This gallery contains field photos and a short writeup summarizing student contributions and findings.
+            </p>
+            <ul class="mt-3 text-slate-300 space-y-1 text-sm">
+              <li>• 5 Photos — fieldwork, awareness drive, sapling care</li>
+              <li>• Student teams from local colleges (names can be updated)</li>
+              <li>• Short project report / presentation available for download</li>
+            </ul>
+          </div>
+
+          <div class="text-right md:text-left">
+            <a href="#" class="inline-block px-4 py-2 rounded-full bg-maatramGreen text-white font-medium shadow hover:bg-green-700 focus-ring" aria-label="Download student report">
+              Download Report
+            </a>
+            <div class="mt-3 text-xs text-slate-400">PDF placeholder — replace with real link</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="students" class="max-w-6xl mx-auto px-4 py-12">
+      <h3 class="text-2xl font-semibold text-green-200 text-center">Gallery — Student Works </h3>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Gallery items: replace `studentX.jpg` with your photos -->
+        <figure class="relative rounded-xl overflow-hidden shadow-lg group">
+          <img src="student1.jpg" alt="Students removing plastic from riverbank" class="w-full h-64 object-cover cursor-pointer" tabindex="0" data-index="0" />
+          <figcaption class="p-3 bg-gradient-to-t from-black/50 to-transparent text-sm text-slate-200">Field cleanup — riverbank</figcaption>
+        </figure>
+
+        <figure class="relative rounded-xl overflow-hidden shadow-lg group">
+          <img src="student2.jpg" alt="Students planting saplings near river" class="w-full h-64 object-cover cursor-pointer" tabindex="0" data-index="1" />
+          <figcaption class="p-3 bg-gradient-to-t from-black/50 to-transparent text-sm text-slate-200">Sapling plantation</figcaption>
+        </figure>
+
+        <figure class="relative rounded-xl overflow-hidden shadow-lg group">
+          <img src="student3.jpg" alt="Awareness session with local residents" class="w-full h-64 object-cover cursor-pointer" tabindex="0" data-index="2" />
+          <figcaption class="p-3 bg-gradient-to-t from-black/50 to-transparent text-sm text-slate-200">Community awareness session</figcaption>
+        </figure>
+
+        <figure class="relative rounded-xl overflow-hidden shadow-lg group">
+          <img src="student4.jpg" alt="Students documenting waste and water samples" class="w-full h-64 object-cover cursor-pointer" tabindex="0" data-index="3" />
+          <figcaption class="p-3 bg-gradient-to-t from-black/50 to-transparent text-sm text-slate-200">Documentation & survey</figcaption>
+        </figure>
+        <figure class="relative rounded-xl overflow-hidden shadow-lg group">
+          <img src="student6.jpg" alt="Students documenting waste and water samples" class="w-full h-64 object-cover cursor-pointer" tabindex="0" data-index="3" />
+          <figcaption class="p-3 bg-gradient-to-t from-black/50 to-transparent text-sm text-slate-200">Documentation & survey</figcaption>
+        </figure>
+
+
+
+
+
+
+
+        <figure class="relative rounded-xl overflow-hidden shadow-lg group">
+          <img src="student5.jpg" alt="Group photo of students and volunteers" class="w-full h-64 object-cover cursor-pointer" tabindex="0" data-index="4" />
+          <figcaption class="p-3 bg-gradient-to-t from-black/50 to-transparent text-sm text-slate-200">Group photo — volunteers</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Lightbox / Modal -->
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+      <button id="lbClose" aria-label="Close" class="absolute top-6 right-6 text-white bg-black/30 hover:bg-black/50 p-2 rounded-full focus-ring">✕</button>
+      <button id="lbPrev" aria-label="Previous image" class="absolute left-6 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 p-2 rounded-full focus-ring">◀</button>
+      <img id="lbImg" src="" alt="Expanded project photo" />
+      <button id="lbNext" aria-label="Next image" class="absolute right-6 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 p-2 rounded-full focus-ring">▶</button>
+    </div>
+
+    <!-- STUDENT NOTES & DOWNLOAD -->
+    <section class="max-w-5xl mx-auto px-4 py-10">
+      <div class="glass p-6 rounded-2xl">
+        <h4 class="text-lg font-semibold text-green-200">Student Notes</h4>
+        <p class="mt-3 text-slate-200">This project gave students field exposure to river ecosystem issues, data collection, waste classification and public engagement. Suggested additions: water sample testing, flora/fauna recording, and a follow-up monitoring plan.</p>
+
+        <div class="mt-4 flex gap-3">
+          <a href="#" class="px-4 py-2 bg-maatramGreen text-white rounded-full focus-ring">Request High-Res Photos</a>
+          <a href="#" class="px-4 py-2 border border-white/10 rounded-full">Add more student projects</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT QUICK -->
+    <section id="contact" class="max-w-6xl mx-auto px-4 py-10">
+      <div class="glass p-6 rounded-2xl">
+        <h4 class="text-lg font-semibold text-green-200">Contact Project Coordinator</h4>
+        <p class="mt-2 text-slate-300">For student acknowledgements, college credits or collaboration details, email us or use the main site contact form.</p>
+        <p class="mt-3 text-slate-200">📧 <a href="mailto:your-email@example.com" class="text-green-300">your-email@example.com</a></p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-8 text-center text-slate-400">
+      © <span id="yr"></span> MAATRAM ON — Students' Works
+    </footer>
+  </main>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Lightbox logic
+    const imgs = Array.from(document.querySelectorAll('img[data-index]'));
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    let currentIndex = 0;
+
+    function openLightbox(index){
+      const el = imgs[index];
+      if(!el) return;
+      lbImg.src = el.src;
+      lbImg.alt = el.alt || 'Project photo';
+      currentIndex = index;
+      lightbox.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+    function showPrev(){
+      currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
+      openLightbox(currentIndex);
+    }
+    function showNext(){
+      currentIndex = (currentIndex + 1) % imgs.length;
+      openLightbox(currentIndex);
+    }
+
+    imgs.forEach(img => {
+      img.addEventListener('click', () => openLightbox(Number(img.getAttribute('data-index'))));
+      img.addEventListener('keypress', (e) => { if(e.key === 'Enter' || e.key === ' ') openLightbox(Number(img.getAttribute('data-index'))); });
+    });
+
+    lbClose.addEventListener('click', closeLightbox);
+    lbPrev.addEventListener('click', showPrev);
+    lbNext.addEventListener('click', showNext);
+
+    // keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('show')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') showPrev();
+      if(e.key === 'ArrowRight') showNext();
+    });
+
+    // click outside to close
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) closeLightbox();
+    });
+
+    <script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          maatramGreen: "#2e7d32",
+          maatramDark: "#1b5e20"
+        }
+      }
+    }
+  };
+
+  /*-------------- LEAF FALLING ANIMATION ---------------- */
+
+  function leafParticles() {
+    const canvas = document.getElementById('leafCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    });
+
+    function leafSprite(size, hue = 120) {
+      const c = document.createElement('canvas');
+      c.width = c.height = size;
+      const cctx = c.getContext('2d');
+      cctx.translate(size / 2, size / 2);
+      cctx.fillStyle = `hsl(${hue} 40% 45%)`;
+
+      cctx.beginPath();
+      cctx.moveTo(0, -size * 0.25);
+      cctx.quadraticCurveTo(size * 0.4, -size * 0.15, size * 0.25, size * 0.25);
+      cctx.quadraticCurveTo(0, size * 0.4, -size * 0.25, size * 0.25);
+      cctx.quadraticCurveTo(-size * 0.4, -size * 0.15, 0, -size * 0.25);
+      cctx.fill();
+      return c;
+    }
+
+    class Leaf {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.size = 10 + Math.random() * 22;
+        this.x = Math.random() * W;
+        this.y = -10 - Math.random() * H * 0.2;
+        this.vx = -0.3 + Math.random() * 0.6;
+        this.vy = 0.4 + Math.random() * 1;
+        this.rot = Math.random() * Math.PI * 2;
+        this.vr = (-0.01 + Math.random() * 0.02);
+        this.sprite = leafSprite(Math.round(this.size), 90 + Math.random() * 60);
+        this.life = 0;
+        this.maxLife = 600 + Math.random() * 800;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.rot += this.vr;
+        this.life++;
+        if (
+          this.y > H + 50 ||
+          this.x < -50 ||
+          this.x > W + 50 ||
+          this.life > this.maxLife
+        ) this.reset();
+      }
+      draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        ctx.drawImage(this.sprite, -this.size / 2, -this.size / 2, this.size, this.size);
+        ctx.restore();
+      }
+    }
+
+    const leaves = [];
+    for (let i = 0; i < 60; i++) leaves.push(new Leaf());
+
+    function animate() {
+      ctx.clearRect(0, 0, W, H);
+      for (const l of leaves) {
+        l.update();
+        l.draw(ctx);
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  window.onload = leafParticles;
+</script>
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Objectives – MAATRAM ON</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            maatramGreen: "#2e7d32",
+            maatramDark: "#1b5e20"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    .glass {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    #leafCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-900 text-white">
+
+  <!-- Leaf Animation Canvas -->
+  <canvas id="leafCanvas"></canvas>
+
+  <!-- NAVBAR -->
+  <header class="py-5 px-6 sticky top-0 bg-slate-900/70 backdrop-blur-md z-50 border-b border-white/10">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo.jpeg" class="w-10 h-10 rounded-full border border-white/20">
+        <span class="font-bold text-lg">MAATRAM ON</span>
+      </a>
+
+      <nav class="hidden md:flex gap-6 text-sm">
+        <a href="index.html" class="hover:text-green-300">Home</a>
+        <a href="projects.html" class="hover:text-green-300">Projects</a>
+        <a href="objective.html" class="text-green-300">Objectives</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="text-center py-16 px-6">
+    <h1 class="text-4xl sm:text-5xl font-bold text-green-300">🌿 Our Trust Objectives</h1>
+    <p class="max-w-2xl mx-auto mt-4 text-slate-300">
+      Highlighting our organisation’s core missions to uplift communities, empower individuals, 
+      and protect nature.
+    </p>
+  </section>
+
+  <!-- OBJECTIVES SECTION -->
+  <section class="max-w-6xl mx-auto px-6 pb-20 space-y-16">
+
+    <!-- EDUCATIONAL OBJECTIVES -->
+    <div>
+      <h2 class="text-3xl font-bold text-green-200 mb-6">📘 Educational Objectives</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Free Education Support</h4>
+          <p class="mt-2 text-slate-200 text-sm">Providing support for underprivileged and rural students.</p>
+        </div>
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Scholarships & Study Materials</h4>
+          <p class="mt-2 text-slate-200 text-sm">Books, uniforms, exam guidance, and learning resources.</p>
+        </div>
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Motivational & Career Programs</h4>
+          <p class="mt-2 text-slate-200 text-sm">Guidance for academic progress and career planning.</p>
+        </div>
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Women SHG Training</h4>
+          <p class="mt-2 text-slate-200 text-sm">Skill development and empowerment for Self-Help Groups.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SOCIAL WELFARE & ENVIRONMENT -->
+    <div>
+      <h2 class="text-3xl font-bold text-green-200 mb-6">🤝 Social Welfare, Women Empowerment & Environment</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Support for Poor Families</h4>
+          <p class="mt-2 text-slate-200 text-sm">Providing essential aid and welfare services.</p>
+        </div>
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Disaster Support</h4>
+          <p class="mt-2 text-slate-200 text-sm">Aid for victims of natural disasters and crises.</p>
+        </div>
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Women Empowerment Training</h4>
+          <p class="mt-2 text-slate-200 text-sm">Skill-building programs for women’s development.</p>
+        </div>
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Tree Plantation & Eco Awareness</h4>
+          <p class="mt-2 text-slate-200 text-sm">Promoting environmental conservation.</p>
+        </div>
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Youth Development</h4>
+          <p class="mt-2 text-slate-200 text-sm">Sports, talent encouragement, and leadership programs.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PUBLIC AWARENESS & SOCIAL JUSTICE -->
+    <div>
+      <h2 class="text-3xl font-bold text-green-200 mb-6">📢 Public Awareness & Social Justice</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Health & Hygiene Awareness</h4>
+          <p class="mt-2 text-slate-200 text-sm">Programs on health, sanitation, and well-being.</p>
+        </div>
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Support for Tribal & Rural Communities</h4>
+          <p class="mt-2 text-slate-200 text-sm">Providing essential resources and community development.</p>
+        </div>
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Support for Homeless & Marginalized</h4>
+          <p class="mt-2 text-slate-200 text-sm">Aid, shelter support, and food distribution.</p>
+        </div>
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Legal Help & Social Justice</h4>
+          <p class="mt-2 text-slate-200 text-sm">Awareness on rights, counselling, and victim assistance.</p>
+        </div>
+
+        <div class="glass p-5 rounded-lg">
+          <h4 class="font-semibold text-green-200">Community Infrastructure</h4>
+          <p class="mt-2 text-slate-200 text-sm">Developing community centres, libraries, and facilities.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-6 text-center text-slate-400 border-t border-white/10">
+    © 2025 MAATRAM ON — Environmental & Social Trust
+  </footer>
+
+  <!-- Leaf Animation Script -->
+  <script>
+    function leafParticles(){
+      const canvas = document.getElementById('leafCanvas');
+      const ctx = canvas.getContext('2d');
+      let W = canvas.width = innerWidth;
+      let H = canvas.height = innerHeight;
+
+      function leafSprite(size, hue=120){
+        const c = document.createElement('canvas');
+        c.width = c.height = size;
+        const cctx = c.getContext('2d');
+        cctx.translate(size/2, size/2);
+        cctx.fillStyle = `hsl(${hue} 40% 45%)`;
+
+        cctx.beginPath();
+        cctx.moveTo(0, -size*0.25);
+        cctx.quadraticCurveTo(size*0.4, -size*0.15, size*0.25, size*0.25);
+        cctx.quadraticCurveTo(0, size*0.4, -size*0.25, size*0.25);
+        cctx.quadraticCurveTo(-size*0.4, -size*0.15, 0, -size*0.25);
+        cctx.fill();
+        return c;
+      }
+
+      class Leaf{
+        constructor(){ this.reset(); }
+        reset(){
+          this.size = 10 + Math.random()*20;
+          this.x = Math.random()*W;
+          this.y = -20;
+          this.vx = -0.3 + Math.random()*0.6;
+          this.vy = 0.6 + Math.random()*1;
+          this.rot = Math.random()*Math.PI*2;
+          this.vr = (-0.01 + Math.random()*0.02);
+          this.sprite = leafSprite(this.size);
+        }
+        update(){
+          this.x += this.vx;
+          this.y += this.vy;
+          this.rot += this.vr;
+          if(this.y > H + 50) this.reset();
+        }
+        draw(){
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.rot);
+          ctx.drawImage(this.sprite, -this.size/2, -this.size/2);
+          ctx.restore();
+        }
+      }
+
+      const leaves = [];
+      for(let i=0;i<60;i++) leaves.push(new Leaf());
+
+      function animate(){
+        ctx.clearRect(0,0,W,H);
+        for(const leaf of leaves){ leaf.update(); leaf.draw(); }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+    leafParticles();
+  </script>
+
+</body>
+</html>

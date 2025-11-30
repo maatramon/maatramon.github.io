@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Kitchen Gardening Project – MAATRAM ON</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            maatramGreen: "#2e7d32",
+            maatramDark: "#1b5e20"
+          }
+        }
+      }
+    };
+
+
+
+
+    /*-------------- LEAF FALLING ANIMATION ---------------- */
+
+function leafParticles(){
+  const canvas = document.getElementById('leafCanvas');
+  const ctx = canvas.getContext('2d');
+  let W = canvas.width = innerWidth;
+  let H = canvas.height = innerHeight;
+
+  window.addEventListener('resize', () => {
+    W = canvas.width = innerWidth;
+    H = canvas.height = innerHeight;
+  });
+
+  // small leaf shape generator
+  function leafSprite(size, hue=120){
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const cctx = c.getContext('2d');
+    cctx.translate(size/2, size/2);
+    cctx.fillStyle = `hsl(${hue} 40% 45%)`;
+
+    cctx.beginPath();
+    cctx.moveTo(0, -size*0.25);
+    cctx.quadraticCurveTo(size*0.4, -size*0.15, size*0.25, size*0.25);
+    cctx.quadraticCurveTo(0, size*0.4, -size*0.25, size*0.25);
+    cctx.quadraticCurveTo(-size*0.4, -size*0.15, 0, -size*0.25);
+    cctx.fill();
+    return c;
+  }
+
+  class Leaf {
+    constructor(){
+      this.reset();
+    }
+    reset(){
+      this.size = 10 + Math.random()*22;
+      this.x = Math.random()*W;
+      this.y = -10 - Math.random()*H*0.2;
+      this.vx = -0.3 + Math.random()*0.6;
+      this.vy = 0.4 + Math.random()*1;
+      this.rot = Math.random()*Math.PI*2;
+      this.vr = (-0.01 + Math.random()*0.02);
+      this.sprite = leafSprite(Math.round(this.size), 90 + Math.random()*60);
+      this.life = 0;
+      this.maxLife = 600 + Math.random()*800;
+    }
+    update(){
+      this.x += this.vx;
+      this.y += this.vy;
+      this.rot += this.vr;
+      this.life++;
+      if(this.y > H + 50 || this.x < -50 || this.x > W + 50 || this.life>this.maxLife) this.reset();
+    }
+    draw(ctx){
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rot);
+      ctx.drawImage(this.sprite, -this.size/2, -this.size/2, this.size, this.size);
+      ctx.restore();
+    }
+  }
+
+  const leaves = [];
+  for(let i=0;i<60;i++) leaves.push(new Leaf());
+
+  function animate(){
+    ctx.clearRect(0,0,W,H);
+    for(const l of leaves){
+      l.update();
+      l.draw(ctx);
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+}();
+
+  </script>
+
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          maatramGreen: "#2e7d32",
+          maatramDark: "#1b5e20"
+        }
+      }
+    }
+  };
+
+  /*-------------- LEAF FALLING ANIMATION ---------------- */
+
+  function leafParticles() {
+    const canvas = document.getElementById('leafCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    });
+
+    function leafSprite(size, hue = 120) {
+      const c = document.createElement('canvas');
+      c.width = c.height = size;
+      const cctx = c.getContext('2d');
+      cctx.translate(size / 2, size / 2);
+      cctx.fillStyle = `hsl(${hue} 40% 45%)`;
+
+      cctx.beginPath();
+      cctx.moveTo(0, -size * 0.25);
+      cctx.quadraticCurveTo(size * 0.4, -size * 0.15, size * 0.25, size * 0.25);
+      cctx.quadraticCurveTo(0, size * 0.4, -size * 0.25, size * 0.25);
+      cctx.quadraticCurveTo(-size * 0.4, -size * 0.15, 0, -size * 0.25);
+      cctx.fill();
+      return c;
+    }
+
+    class Leaf {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.size = 10 + Math.random() * 22;
+        this.x = Math.random() * W;
+        this.y = -10 - Math.random() * H * 0.2;
+        this.vx = -0.3 + Math.random() * 0.6;
+        this.vy = 0.4 + Math.random() * 1;
+        this.rot = Math.random() * Math.PI * 2;
+        this.vr = (-0.01 + Math.random() * 0.02);
+        this.sprite = leafSprite(Math.round(this.size), 90 + Math.random() * 60);
+        this.life = 0;
+        this.maxLife = 600 + Math.random() * 800;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.rot += this.vr;
+        this.life++;
+        if (
+          this.y > H + 50 ||
+          this.x < -50 ||
+          this.x > W + 50 ||
+          this.life > this.maxLife
+        ) this.reset();
+      }
+      draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        ctx.drawImage(this.sprite, -this.size / 2, -this.size / 2, this.size, this.size);
+        ctx.restore();
+      }
+    }
+
+    const leaves = [];
+    for (let i = 0; i < 60; i++) leaves.push(new Leaf());
+
+    function animate() {
+      ctx.clearRect(0, 0, W, H);
+      for (const l of leaves) {
+        l.update();
+        l.draw(ctx);
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  window.onload = leafParticles;
+</script>
+
+  <style>
+    .glass {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(6px);
+    }
+
+        /* ✨ Glow Light Beams */
+.light-beams {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% -20%, rgba(85,255,150,0.15), transparent 70%),
+              radial-gradient(circle at 20% 10%, rgba(120,255,200,0.12), transparent 70%),
+              radial-gradient(circle at 80% 20%, rgba(50,255,180,0.15), transparent 70%);
+  filter: blur(70px);
+  z-index: -8;
+  animation: beamShift 10s infinite alternate ease-in-out;
+}
+
+@keyframes beamShift {
+  0% { transform: translateY(0px) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-35px) scale(1.1); opacity: 0.8; }
+  100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+}
+  </style>
+</head>
+
+<body class="bg-slate-900 text-white">
+
+  <canvas id="leafCanvas" class="fixed inset-0 -z-10 pointer-events-none"></canvas>
+  <div class="light-beams pointer-events-none"></div>
+
+  <!-- HEADER -->
+  <header class="py-5 px-6 sticky top-0 bg-slate-900/70 backdrop-blur-md z-50 border-b border-white/10">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo.jpeg" class="w-10 h-10 rounded-full border border-white/20">
+        <span class="font-bold text-lg">MAATRAM ON</span>
+      </a>
+      <nav class="hidden md:flex gap-6 text-sm">
+        <a href="index.html" class="hover:text-green-300">Home</a>
+        <a href="projects.html" class="hover:text-green-300">Projects</a>
+        <a href="pdfs.html" class="hover:text-green-300">PDFs</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="text-center py-20 px-6">
+    <h1 class="text-4xl sm:text-5xl font-bold text-green-300">🌿 MAATRAM ON – Projects & Initiatives</h1>
+    <p class="max-w-2xl mx-auto mt-4 text-slate-300">
+      Our major community-focused environmental, health, educational, and zero-waste initiatives across Tamil Nadu.
+    </p>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section class="max-w-6xl mx-auto px-6 pb-24 space-y-16">
+
+    <!-- 1. School & College NSS Camps -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-3xl font-bold text-green-200">🏫 School & College NSS Camps</h2>
+      <p class="mt-2 text-slate-300">
+        We conduct and support  NSS special camps, Eco club activities, environmental cleaning drives and student involvement programs.
+      </p>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        <img src="nss1.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="nss2.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="nss3.jpg" class="w-full h-48 object-cover rounded-lg" />
+         <img src="nss4.jpg" class="w-full h-48 object-cover rounded-lg" />
+          <img src="nss5.jpg" class="w-full h-48 object-cover rounded-lg" />
+           <img src="nss6.jpg" class="w-full h-48 object-cover rounded-lg" />
+           <img src="nss7.jpg" class="w-full h-48 object-cover rounded-lg" />
+
+      </div>
+    </div>
+
+    <!-- 2. Awareness Creation Programs -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-3xl font-bold text-green-200">📢 Awareness Creation Programs</h2>
+      <p class="mt-2 text-slate-300">
+        Mass awareness programs on environment, waste segregation, water conservation, hygiene, and community responsibility.
+      </p>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        <img src="ass1.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="ass2.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="ass3.jpg" class="w-full h-48 object-cover rounded-lg" />
+ <img src="ass4.jpg" class="w-full h-48 object-cover rounded-lg" />
+
+    </div>
+
+    <!-- 3. Corporate & Government Sector Work -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-3xl font-bold text-green-200">🏢 Corporate & Government Sector Collaboration</h2>
+      <p class="mt-2 text-slate-300">
+        Sustainable workplace programs, employee awareness, office waste audits and green transformation projects.
+      </p>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        <img src="gov1.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="gov2.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="gov3.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="gov4.jpg" class="w-full h-48 object-cover rounded-lg" />
+      </div>
+    </div>
+
+    <!-- 4. Stress Relief Programs -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-3xl font-bold text-green-200">🧘 Stress Relief & Wellness Programs</h2>
+      <p class="mt-2 text-slate-300">
+        Mental health sessions, breathing techniques, emotional wellness and counselling for students/employees.
+      </p>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        <img src="wel1.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="wel2.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="wel3.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="wel4.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="wel5.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="wel6.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="wel7.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="wel8.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="wel9.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="wel10.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="wel11.jpg" class="w-full h-48 object-cover rounded-lg" />
+       
+      </div>
+    </div>
+
+
+
+    <!-- 6. Zero Waste Management for Events -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-3xl font-bold text-green-200">♻️ Zero Waste Event Management</h2>
+      <p class="mt-2 text-slate-300">
+        We provide complete zero-waste services for marriages, corporate meets, school events and public functions.
+      </p>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        <img src="zw1.jpg" class="w-full h-48 object-cover rounded-lg" />
+         <img src="zw2.jpg" class="w-full h-48 object-cover rounded-lg" />
+          <img src="zw3.jpg" class="w-full h-48 object-cover rounded-lg" />
+        
+         <img src="zw4.jpg" class="w-full h-48 object-cover rounded-lg" />
+         <img src="zw5.jpg" class="w-full h-48 object-cover rounded-lg" />
+        
+         <img src="zw6.jpg" class="w-full h-48 object-cover rounded-lg" />
+        
+      </div>
+    </div>
+
+    <!-- 7. School Kitchen Garden -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-3xl font-bold text-green-200">🌱 School Kitchen Garden Projects</h2>
+      <p class="mt-2 text-slate-300">
+        Organic nutrition gardens in schools to promote sustainability, fresh food and agricultural learning.
+      </p>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        <img src="k1.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="k2.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="k3.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="k4.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="k5.jpg" class="w-full h-48 object-cover rounded-lg" />
+        <img src="k6.jpg" class="w-full h-48 object-cover rounded-lg" />
+        
+      </div>
+    </div>
+
+    <!-- 8. Community Programs -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-3xl font-bold text-green-200">🤝 Community Development Programs</h2>
+      <p class="mt-2 text-slate-300">
+        Clean-ups, tree plantation, river restoration, public awareness and community mobilisation programs.
+      </p>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        <img src="trust1.jpg" class="w-full h-48 object-cover rounded-lg" />
+         <img src="trust2.jpg" class="w-full h-48 object-cover rounded-lg" />
+          <img src="trust3.jpg" class="w-full h-48 object-cover rounded-lg" />
+           <img src="trust4.jpg" class="w-full h-48 object-cover rounded-lg" />
+            <img src="trust5.jpg" class="w-full h-48 object-cover rounded-lg" />
+             <img src="trust6.jpg" class="w-full h-48 object-cover rounded-lg" />
+              <img src="trust7.jpg" class="w-full h-48 object-cover rounded-lg" />
+               <img src="trust8.jpg" class="w-full h-48 object-cover rounded-lg" />
+                <img src="trust9.jpg" class="w-full h-48 object-cover rounded-lg" />
+                 <img src="trust10.jpg" class="w-full h-48 object-cover rounded-lg" />
+                  <img src="trust11.jpg" class="w-full h-48 object-cover rounded-lg" />
+                   <img src="trust12.jpg" class="w-full h-48 object-cover rounded-lg" />
+                    
+                   
+        
+      </div>
+    </div>
+
+   
+
+  </section>
+
+
+
+</body>
+
+
+<!-- Floating Clouds -->
+
+<!-- Glow Light Beams -->
+<div class="light-beams pointer-events-none"></div>
+
+ 
+
+  <!-- HERO -->
+  <section class="text-center py-20 px-6">
+    <h1 class="text-4xl sm:text-5xl font-bold text-green-300">🌱 School Kitchen Gardening Project</h1>
+    <p class="max-w-2xl mx-auto mt-4 text-slate-300">
+      A sustainability and environmental learning initiative implemented by MAATRAM ON Trust.
+    </p>
+
+    <!-- Optional PDF Download -->
+    <a href="Document (22).pdf" download
+       class="inline-block mt-6 px-6 py-3 bg-maatramGreen hover:bg-maatramDark rounded-full shadow">
+       ⬇ Download Project PDF
+    </a>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="max-w-5xl mx-auto px-6 pb-20 space-y-12">
+
+    <!-- 1. TITLE -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-2xl font-bold text-green-200">1. Project Title</h2>
+      <p class="mt-2 text-slate-200">“Green Classrooms Initiative – School Kitchen Gardening Project”</p>
+    </div>
+
+    <!-- 2. INTRO -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-2xl font-bold text-green-200">2. Project Introduction</h2>
+      <p class="mt-3 text-slate-300 leading-relaxed">
+        Maatram On Trust proposes a School Kitchen Gardening Project at the selected Government School to create a hands-on environmental learning experience for students.
+        This initiative transforms unused school spaces into productive gardens, promoting sustainability, nutrition awareness, and agricultural education.
+        It serves as a model for eco-friendly learning benefiting students, teachers, and the community.
+      </p>
+    </div>
+
+    <!-- 3. OBJECTIVES -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-2xl font-bold text-green-200">3. Project Objectives</h2>
+      <ul class="mt-3 text-slate-300 space-y-2 list-disc list-inside">
+        <li>Create a functional and sustainable kitchen garden.</li>
+        <li>Educate students on organic farming and healthy eating.</li>
+        <li>Integrate gardening with academic and life skills.</li>
+        <li>Promote teamwork, responsibility, environmental awareness.</li>
+        <li>Support school’s midday meals with fresh herbs and vegetables.</li>
+      </ul>
+    </div>
+
+    <!-- 4. BENEFICIARIES -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-2xl font-bold text-green-200">4. Target Beneficiaries</h2>
+      <ul class="mt-3 text-slate-300 space-y-2 list-disc list-inside">
+        <li>Primary & Secondary Students</li>
+        <li>School Eco-Club Members</li>
+        <li>Teachers & Volunteers</li>
+        <li>Community Members involved in sustainability</li>
+      </ul>
+    </div>
+
+    <!-- 5. ACTIVITIES -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-2xl font-bold text-green-200">5. Project Activities</h2>
+
+      <!-- 5.1 -->
+      <h3 class="text-lg font-semibold mt-4 text-green-300">5.1 Space Inspection & Planning</h3>
+      <ul class="text-slate-300 list-disc ml-5 mt-2">
+        <li>Identify suitable spaces</li>
+        <li>Plan layout for beds, compost, water access</li>
+      </ul>
+
+      <!-- 5.2 -->
+      <h3 class="text-lg font-semibold mt-4 text-green-300">5.2 Soil Preparation & Setup</h3>
+      <ul class="text-slate-300 list-disc ml-5 mt-2">
+        <li>Clear area</li>
+        <li>Use grow bags/raised beds</li>
+        <li>Mix soil, compost, coco peat</li>
+        <li>Install drip system (optional)</li>
+      </ul>
+
+      <!-- 5.3 -->
+      <h3 class="text-lg font-semibold mt-4 text-green-300">5.3 Training & Awareness</h3>
+      <ul class="text-slate-300 list-disc ml-5 mt-2">
+        <li>Basics of kitchen gardening</li>
+        <li>Importance of organic food</li>
+        <li>Seed sowing, plant care</li>
+        <li>Composting food waste</li>
+      </ul>
+
+      <!-- 5.4 -->
+      <h3 class="text-lg font-semibold mt-4 text-green-300">5.4 Gardening Materials Distribution</h3>
+      <ul class="text-slate-300 list-disc ml-5 mt-2">
+        <li>Grow bags / Raised beds</li>
+        <li>Vegetable seeds (greens, tomato, chilli, etc.)</li>
+        <li>Saplings (tomato, brinjal, curry leaves)</li>
+        <li>Compost & soil mix</li>
+        <li>Gardening tools</li>
+      </ul>
+
+      <!-- 5.5 -->
+      <h3 class="text-lg font-semibold mt-4 text-green-300">5.5 Demonstration Garden</h3>
+      <ul class="text-slate-300 list-disc ml-5 mt-2">
+        <li>Daily upkeep</li>
+        <li>Rotational watering</li>
+        <li>Organic pest control</li>
+      </ul>
+
+      <!-- 5.6 -->
+      <h3 class="text-lg font-semibold mt-4 text-green-300">5.6 Monitoring & Support</h3>
+      <ul class="text-slate-300 list-disc ml-5 mt-2">
+        <li>Weekly volunteer visits</li>
+        <li>Guidance via photos/WhatsApp</li>
+        <li>Crop planning</li>
+        <li>Monthly performance reports</li>
+      </ul>
+
+    </div>
+
+    <!-- 6. OUTCOMES -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-2xl font-bold text-green-200">6. Expected Outcomes</h2>
+      <ul class="mt-3 text-slate-300 space-y-2 list-disc list-inside">
+        <li>Organic garden inside the school</li>
+        <li>Better understanding of biology & sustainability</li>
+        <li>Teamwork and life-skill development</li>
+        <li>Greener environment inside school</li>
+        <li>Optional meal system support</li>
+        <li>Strong environmental culture among students</li>
+      </ul>
+    </div>
+
+    <!-- 7. INDICATORS -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-2xl font-bold text-green-200">7. Impact Indicators</h2>
+      <ul class="mt-3 text-slate-300 space-y-2 list-disc list-inside">
+        <li>Number of student participants</li>
+        <li>Variety of vegetables grown</li>
+        <li>Seasonal harvest quantity</li>
+        <li>Waste reduced through composting</li>
+        <li>Student learning outcomes</li>
+      </ul>
+    </div>
+
+    <!-- 8. DURATION -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-2xl font-bold text-green-200">8. Project Duration</h2>
+
+      <p class="mt-3 font-semibold text-green-300">Phase 1 – 2 Months:</p>
+      <ul class="text-slate-300 list-disc ml-5 mt-2">
+        <li>Week 1–2: Planning & Setup</li>
+        <li>Week 3–6: Training & Maintenance</li>
+        <li>Week 7–8: Monitoring & Harvest Review</li>
+      </ul>
+
+      <p class="mt-4 font-semibold text-green-300">Phase 2 – Ongoing:</p>
+      <p class="text-slate-300 ml-5 mt-1">Regular maintenance throughout the academic year.</p>
+    </div>
+
+    <!-- 9. BUDGET -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-2xl font-bold text-green-200">9. Estimated Budget (Sample)</h2>
+
+      <div class="overflow-x-auto mt-4">
+        <table class="w-full text-left text-sm">
+          <thead class="text-green-300 border-b border-white/20">
+            <tr>
+              <th class="py-2">Item</th>
+              <th>Quantity</th>
+              <th>Cost</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-300">
+            <tr><td class="py-2">Grow bags / Bed setup</td><td>30 units</td><td>₹80 each</td><td>₹2,400</td></tr>
+            <tr><td class="py-2">Soil + Compost + Coco Peat</td><td>300 kg</td><td>₹10/kg</td><td>₹3,000</td></tr>
+            <tr><td class="py-2">Seeds & Saplings</td><td>—</td><td>—</td><td>₹1,200</td></tr>
+            <tr><td class="py-2">Tools</td><td>Set</td><td>—</td><td>₹2,000</td></tr>
+            <tr><td class="py-2">Training & Workshop</td><td>—</td><td>—</td><td>₹2,000</td></tr>
+            <tr><td class="py-2">Monitoring & Follow-up</td><td>—</td><td>—</td><td>₹1,500</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-4 text-green-300 font-semibold">Total Estimated Cost: ₹12,000 – ₹15,000</p>
+      <p class="text-slate-400 text-sm">(May vary by school size)</p>
+    </div>
+
+    <!-- 10. SUSTAINABILITY -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-2xl font-bold text-green-200">10. Sustainability Plan</h2>
+      <ul class="mt-3 text-slate-300 space-y-2 list-disc list-inside">
+        <li>Student Eco Club will manage garden</li>
+        <li>Weekly care duties assigned</li>
+        <li>Composting school waste</li>
+        <li>Seasonal crop rotation</li>
+        <li>Teacher & volunteer training for continuity</li>
+      </ul>
+    </div>
+
+    <!-- 11. CONCLUSION -->
+    <div class="glass p-6 rounded-2xl">
+      <h2 class="text-2xl font-bold text-green-200">11. Conclusion</h2>
+      <p class="mt-3 text-slate-300">
+        The School Kitchen Gardening Project by Maatram On Trust helps shape environmentally responsible,
+        health-conscious future citizens. It enhances learning and brings greenery, nourishment, and creativity
+        to the school environment.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-6 text-center text-slate-400 border-t border-white/10">
+    © 2025 MAATRAM ON — Environmental Trust
+  </footer>
+
+</body>
+</html>

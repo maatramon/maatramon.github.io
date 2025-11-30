@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects – MAATRAM ON</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            maatramGreen: "#2e7d32",
+            maatramDark: "#1b5e20",
+          },
+        },
+      },
+    };
+
+   
+  </script>
+
+  <style>
+    .glass {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(7px);
+    }
+
+    /* ✨ Glow Light Beams */
+.light-beams {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% -20%, rgba(85,255,150,0.15), transparent 70%),
+              radial-gradient(circle at 20% 10%, rgba(120,255,200,0.12), transparent 70%),
+              radial-gradient(circle at 80% 20%, rgba(50,255,180,0.15), transparent 70%);
+  filter: blur(70px);
+  z-index: -8;
+  animation: beamShift 10s infinite alternate ease-in-out;
+}
+
+@keyframes beamShift {
+  0% { transform: translateY(0px) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-35px) scale(1.1); opacity: 0.8; }
+  100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+}
+
+  </style>
+</head>
+
+<body class="bg-slate-900 text-white">
+<canvas id="leafCanvas" class="fixed inset-0 -z-10 pointer-events-none"></canvas>
+
+<!-- Floating Clouds -->
+
+<!-- Glow Light Beams -->
+<div class="light-beams pointer-events-none"></div>
+  <!-- NAVBAR -->
+  <header class="p-4 bg-slate-900/70 backdrop-blur-md fixed left-0 right-0 top-0 z-50">
+    <nav class="max-w-7xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo.jpeg" class="w-12 h-12 rounded-full border border-white/20">
+        <span class="font-bold">MAATRAM ON</span>
+      </a>
+
+      <div class="hidden md:flex gap-6">
+        <a href="index.html" class="hover:text-green-300">Home</a>
+        <a href="#gallery" class="hover:text-green-300">Gallery</a>
+        <a href="#video" class="hover:text-green-300">Video</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="pt-32 pb-20 text-center px-6">
+    <h1 class="text-4xl font-bold text-green-300">🌊 Perur Noyal River Cleaning Project</h1>
+    <p class="mt-4 text-slate-300 max-w-3xl mx-auto">
+      A successful environmental restoration initiative by MAATRAM ON to revive the Noyal River ecosystem in Perur. This project involved waste removal, awareness drives, water flow restoration, and community participation.
+    </p>
+  </section>
+
+  <!-- PROJECT DETAILS -->
+  <section class="px-6 max-w-6xl mx-auto glass p-8 rounded-2xl mb-16">
+    <h2 class="text-2xl font-semibold text-green-200">📌 About the Project</h2>
+    <p class="mt-3 text-slate-200 leading-relaxed">
+      The Perur Noyal River Cleaning Project focused on removing plastic waste, clearing blockages, restoring river flow, and improving the cleanliness and ecological balance of the Noyal River. Volunteers from local communities, students, and environmental groups actively participated in this initiative.
+    </p>
+
+    <ul class="mt-4 text-slate-300 space-y-2">
+      <li>✔ Waste removal from river banks & water flow areas</li>
+      <li>✔ Plastic & debris extraction using eco-friendly tools</li>
+      <li>✔ Awareness sessions conducted for nearby villages</li>
+      <li>✔ Restoration of natural water pathways</li>
+      <li>✔ Documentation & future monitoring</li>
+    </ul>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="px-6 max-w-7xl mx-auto mb-16">
+    <h2 class="text-3xl text-green-300 font-bold text-center mb-10">📸 Project Photo Gallery</h2>
+
+    <!-- Replace images here -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <img src="perur1.jpg" class="rounded-xl shadow-lg hover:scale-105 transition" />
+      <img src="perur2.jpg" class="rounded-xl shadow-lg hover:scale-105 transition" />
+      <img src="perur3.jpg" class="rounded-xl shadow-lg hover:scale-105 transition" />
+      <img src="perur4.jpg" class="rounded-xl shadow-lg hover:scale-105 transition" />
+      <img src="perur5.jpg" class="rounded-xl shadow-lg hover:scale-105 transition" />
+      <img src="perur6.jpg" class="rounded-xl shadow-lg hover:scale-105 transition" />
+            <img src="perur9.jpg" class="rounded-xl shadow-lg hover:scale-105 transition" />
+      <img src="perur8.jpg" class="rounded-xl shadow-lg hover:scale-105 transition" />
+      <img src="perur.jpg" class="rounded-xl shadow-lg hover:scale-105 transition" />
+
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section id="video" class="px-6 max-w-5xl mx-auto mb-20">
+    <h2 class="text-3xl text-green-300 font-bold text-center mb-8">🎥 Project Video</h2>
+
+    <div class="rounded-2xl overflow-hidden shadow-xl border border-white/20">
+      <!-- Replace video below -->
+      <video controls class="w-full">
+        <source src="perur-video.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 bg-slate-900/80 text-center border-t border-white/10">
+    <p class="text-slate-300">© 2025 MAATRAM ON | Environmental Trust</p>
+  </footer>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          maatramGreen: "#2e7d32",
+          maatramDark: "#1b5e20"
+        }
+      }
+    }
+  };
+
+  /*-------------- LEAF FALLING ANIMATION ---------------- */
+
+  function leafParticles() {
+    const canvas = document.getElementById('leafCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    });
+
+    function leafSprite(size, hue = 120) {
+      const c = document.createElement('canvas');
+      c.width = c.height = size;
+      const cctx = c.getContext('2d');
+      cctx.translate(size / 2, size / 2);
+      cctx.fillStyle = `hsl(${hue} 40% 45%)`;
+
+      cctx.beginPath();
+      cctx.moveTo(0, -size * 0.25);
+      cctx.quadraticCurveTo(size * 0.4, -size * 0.15, size * 0.25, size * 0.25);
+      cctx.quadraticCurveTo(0, size * 0.4, -size * 0.25, size * 0.25);
+      cctx.quadraticCurveTo(-size * 0.4, -size * 0.15, 0, -size * 0.25);
+      cctx.fill();
+      return c;
+    }
+
+    class Leaf {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.size = 10 + Math.random() * 22;
+        this.x = Math.random() * W;
+        this.y = -10 - Math.random() * H * 0.2;
+        this.vx = -0.3 + Math.random() * 0.6;
+        this.vy = 0.4 + Math.random() * 1;
+        this.rot = Math.random() * Math.PI * 2;
+        this.vr = (-0.01 + Math.random() * 0.02);
+        this.sprite = leafSprite(Math.round(this.size), 90 + Math.random() * 60);
+        this.life = 0;
+        this.maxLife = 600 + Math.random() * 800;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.rot += this.vr;
+        this.life++;
+        if (
+          this.y > H + 50 ||
+          this.x < -50 ||
+          this.x > W + 50 ||
+          this.life > this.maxLife
+        ) this.reset();
+      }
+      draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        ctx.drawImage(this.sprite, -this.size / 2, -this.size / 2, this.size, this.size);
+        ctx.restore();
+      }
+    }
+
+    const leaves = [];
+    for (let i = 0; i < 60; i++) leaves.push(new Leaf());
+
+    function animate() {
+      ctx.clearRect(0, 0, W, H);
+      for (const l of leaves) {
+        l.update();
+        l.draw(ctx);
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  window.onload = leafParticles;
+</script>
+
+</body>
+</html>

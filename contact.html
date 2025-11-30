@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Registrations – MAATRAM ON</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            maatramGreen: '#2e7d32',
+            maatramDark: '#1b5e20'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .glass {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Success Popup */
+    #successPopup {
+      animation: pop 0.35s ease-out;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+
+
+    }
+
+
+
+    /* ✨ Glow Light Beams */
+.light-beams {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% -20%, rgba(85,255,150,0.15), transparent 70%),
+              radial-gradient(circle at 20% 10%, rgba(120,255,200,0.12), transparent 70%),
+              radial-gradient(circle at 80% 20%, rgba(50,255,180,0.15), transparent 70%);
+  filter: blur(70px);
+  z-index: -8;
+  animation: beamShift 10s infinite alternate ease-in-out;
+}
+
+@keyframes beamShift {
+  0% { transform: translateY(0px) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-35px) scale(1.1); opacity: 0.8; }
+  100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+}
+  </style>
+</head>
+
+<style>
+  #leafCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -10;
+    pointer-events: none;
+  }
+</style>
+
+
+<body class="bg-slate-900 text-white min-h-screen">
+<!-- Falling Leaf Background -->
+<canvas id="leafCanvas" class="fixed inset-0 -z-10 pointer-events-none"></canvas>
+
+<!-- Floating Clouds -->
+
+<!-- Glow Light Beams -->
+<div class="light-beams pointer-events-none"></div>
+<!-- Flying Butterflies -->
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 bg-slate-900/70 backdrop-blur-md z-50">
+    <nav class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo.jpeg" class="w-10 h-10 rounded-full border border-white/20">
+        <span class="font-bold text-lg">MAATRAM ON</span>
+      </a>
+
+      <div class="hidden md:flex gap-6 text-sm">
+        <a href="index.html" class="hover:text-green-300">Home</a>
+        <a href="about.html" class="hover:text-green-300">About</a>
+        <a href="projects.html" class="hover:text-green-300">Projects</a>
+        <a href="contact.html" class="text-green-300">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO HEADER -->
+  <section class="pt-32 pb-12 text-center px-6">
+    <h1 class="text-4xl font-bold text-green-300">📞 Contact & Registration</h1>
+    <p class="text-slate-300 mt-3 max-w-2xl mx-auto">
+      Send us a message, register as a volunteer or student. All submissions are delivered to our Discord dashboard.
+    </p>
+  </section>
+
+
+  <!-- CONTACT FORM -->
+  <section class="max-w-4xl mx-auto px-6 pb-16">
+    <div class="glass p-10 rounded-2xl shadow-xl">
+      <h2 class="text-3xl font-bold text-green-300 text-center mb-6">📩 Contact Form</h2>
+
+      <form id="contactForm" class="space-y-5">
+
+        <input id="c_name" required type="text" placeholder="Full Name" class="w-full p-3 rounded-lg glass">
+        <input id="c_email" required type="email" placeholder="Email Address" class="w-full p-3 rounded-lg glass">
+        <input id="c_phone" type="text" placeholder="Phone Number" class="w-full p-3 rounded-lg glass">
+
+        <textarea id="c_message" required rows="5" placeholder="Your Message"
+          class="w-full p-3 rounded-lg glass"></textarea>
+
+        <label class="text-green-200 text-sm">Attach Images (optional)</label>
+        <input id="c_file" type="file" accept="image/*" multiple
+          class="w-full p-3 rounded-lg bg-slate-800 border border-white/10">
+
+        <button id="submitBtn" type="submit"
+          class="w-full py-3 bg-maatramGreen hover:bg-maatramDark rounded-full font-semibold text-white">
+          Send to Discord
+        </button>
+
+      </form>
+
+      <p id="cooldownMsg" class="text-red-400 text-center text-sm mt-3 hidden"></p>
+    </div>
+  </section>
+
+
+  <!-- VOLUNTEER FORM -->
+  <section class="max-w-4xl mx-auto px-6 pb-16">
+    <div class="glass p-10 rounded-2xl shadow-xl">
+
+      <h2 class="text-3xl font-bold text-green-300 text-center mb-6">🙋 Volunteer Registration</h2>
+
+      <form id="volunteerForm" class="space-y-5">
+
+        <input id="v_name" required type="text" placeholder="Full Name" class="w-full p-3 rounded-lg glass">
+        <input id="v_age" required type="number" placeholder="Age" class="w-full p-3 rounded-lg glass">
+        <select id="v_gender" required class="w-full p-3 rounded-lg glass">
+          <option value="">Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Prefer Not to Say</option>
+        </select>
+
+        <input id="v_phone" required type="text" placeholder="Phone Number" class="w-full p-3 rounded-lg glass">
+        <input id="v_email" type="email" placeholder="Email Address" class="w-full p-3 rounded-lg glass">
+        <input id="v_address" required type="text" placeholder="Full Address" class="w-full p-3 rounded-lg glass">
+
+        <input id="v_skills" type="text" placeholder="Skills (optional)" class="w-full p-3 rounded-lg glass">
+
+        <select id="v_area" required class="w-full p-3 rounded-lg glass">
+          <option value="">Preferred Area</option>
+          <option>Tree Plantation</option>
+          <option>River Cleaning</option>
+          <option>Awareness Campaigns</option>
+          <option>School Activities</option>
+          <option>Documentation</option>
+        </select>
+
+        <select id="v_availability" required class="w-full p-3 rounded-lg glass">
+          <option value="">Availability</option>
+          <option>Weekdays</option>
+          <option>Weekends</option>
+          <option>Daily</option>
+          <option>Occasional</option>
+        </select>
+
+        <label class="text-green-200 text-sm">Photo / ID Proof</label>
+        <input id="v_file" type="file" accept="image/*" class="w-full p-3 rounded-lg bg-slate-800 border border-white/10">
+
+        <button type="submit"
+          class="w-full py-3 bg-maatramGreen hover:bg-maatramDark rounded-full font-semibold text-white">
+          Submit Volunteer Form
+        </button>
+
+      </form>
+
+    </div>
+  </section>
+
+
+  <!-- STUDENT REGISTRATION FORM -->
+  <section class="max-w-4xl mx-auto px-6 pb-24">
+    <div class="glass p-10 rounded-2xl shadow-xl">
+
+      <h2 class="text-3xl font-bold text-blue-300 text-center mb-6">🎓 Student Registration</h2>
+
+      <form id="studentForm" class="space-y-5">
+
+        <input id="s_name" required type="text" placeholder="Full Name" class="w-full p-3 rounded-lg glass">
+        <input id="s_age" required type="number" placeholder="Age" class="w-full p-3 rounded-lg glass">
+        <input id="s_class" required type="text" placeholder="Class / Department" class="w-full p-3 rounded-lg glass">
+        <input id="s_school" required type="text" placeholder="School / College Name" class="w-full p-3 rounded-lg glass">
+        <input id="s_phone" required type="text" placeholder="Phone Number" class="w-full p-3 rounded-lg glass">
+        <input id="s_email" type="email" placeholder="Email Address" class="w-full p-3 rounded-lg glass">
+
+        <textarea id="s_reason" rows="4" placeholder="Why do you want to join?"
+          class="w-full p-3 rounded-lg glass"></textarea>
+
+        <label class="text-blue-200 text-sm">Student ID / Photo</label>
+        <input id="s_file" type="file" accept="image/*"
+          class="w-full p-3 rounded-lg bg-slate-800 border border-white/10">
+
+        <button type="submit"
+          class="w-full py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-semibold text-white">
+          Submit Student Registration
+        </button>
+
+      </form>
+
+    </div>
+  </section>
+
+
+  <!-- SUCCESS POPUP -->
+  <div id="successPopup"
+    class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+    <div class="bg-slate-800 p-8 rounded-2xl shadow-xl text-center max-w-sm w-full">
+      <h3 class="text-2xl font-bold text-green-300">✔ Form Submitted!</h3>
+      <p class="text-slate-300 mt-2">Your details have been sent to our Discord Team.</p>
+      <button onclick="closePopup()"
+        class="mt-6 px-6 py-2 bg-maatramGreen hover:bg-maatramDark rounded-full">
+        OK
+      </button>
+    </div>
+  </div>
+
+
+  <!-- GOOGLE MAP -->
+  <section class="max-w-4xl mx-auto px-6 pb-20">
+    <h2 class="text-2xl font-bold text-green-200 mb-4 text-center">📍 Our Location</h2>
+
+    <div class="glass rounded-2xl overflow-hidden shadow-lg">
+      <iframe width="100%" height="350" style="border:0; filter:brightness(0.8)"
+        loading="lazy"
+        allowfullscreen
+        src="https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_API_KEY&q=Coimbatore,Tamil Nadu"></iframe>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="py-6 text-center text-slate-400 border-t border-white/10">
+    © 2025 MAATRAM ON — Environmental Trust
+  </footer>
+
+
+  <!-- DISCORD SCRIPT -->
+  <script>
+
+    const WEBHOOK_URL = "https://discord.com/api/webhooks/1444297789252042923/-mrUf9umX2Ht30_XQ4pNA2o88apnf7OyvGqVEyHrJ0Fqsz_TiRhshjbTIO2YI20qxOEa"; // <<< REQUIRED
+    let cooldown = false;
+
+    function startCooldown() {
+      cooldown = true;
+      document.getElementById("submitBtn").disabled = true;
+      const msg = document.getElementById("cooldownMsg");
+      msg.innerText = "Please wait 10 seconds...";
+      msg.classList.remove("hidden");
+
+      setTimeout(() => {
+        cooldown = false;
+        document.getElementById("submitBtn").disabled = false;
+        msg.classList.add("hidden");
+      }, 10000);
+    }
+
+    function showPopup() {
+      document.getElementById("successPopup").style.display = "flex";
+    }
+    function closePopup() {
+      document.getElementById("successPopup").style.display = "none";
+    }
+
+
+    /* -------------------- SEND TO DISCORD (GENERIC FUNCTION) -------------------- */
+    async function sendToDiscord(formData) {
+      try {
+        await fetch(WEBHOOK_URL, { method: "POST", body: formData });
+        showPopup();
+      } catch (err) {
+        alert("Failed to send to Discord.");
+      }
+    }
+
+
+    /* ------------------------ CONTACT FORM ------------------------ */
+    document.getElementById("contactForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (cooldown) return;
+
+      const name = c_name.value.trim();
+      const email = c_email.value.trim();
+      const phone = c_phone.value.trim();
+      const message = c_message.value.trim();
+      const files = c_file.files;
+
+      const embed = {
+        title: "📩 Contact Submission",
+        color: 5763719,
+        fields: [
+          { name: "👤 Name", value: name },
+          { name: "📧 Email", value: email },
+          { name: "📞 Phone", value: phone || "Not provided" },
+          { name: "💬 Message", value: message }
+        ],
+        timestamp: new Date()
+      };
+
+      const data = new FormData();
+      data.append("payload_json", JSON.stringify({ username: "MAATRAM Contact Bot", embeds: [embed] }));
+
+      for (let f of files) data.append("file", f);
+
+      startCooldown();
+      sendToDiscord(data);
+      e.target.reset();
+    });
+
+
+    /* --------------------- VOLUNTEER FORM --------------------- */
+    document.getElementById("volunteerForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (cooldown) return;
+
+      const embed = {
+        title: "🙋 Volunteer Registration",
+        color: 8311585,
+        fields: [
+          { name: "Name", value: v_name.value },
+          { name: "Age", value: v_age.value },
+          { name: "Gender", value: v_gender.value },
+          { name: "Phone", value: v_phone.value },
+          { name: "Email", value: v_email.value || "N/A" },
+          { name: "Address", value: v_address.value },
+          { name: "Skills", value: v_skills.value || "N/A" },
+          { name: "Preferred Area", value: v_area.value },
+          { name: "Availability", value: v_availability.value }
+        ],
+        timestamp: new Date()
+      };
+
+      const data = new FormData();
+      data.append("payload_json", JSON.stringify({ username: "MAATRAM Volunteer Bot", embeds: [embed] }));
+      const file = v_file.files[0];
+      if (file) data.append("file", file);
+
+      startCooldown();
+      sendToDiscord(data);
+      e.target.reset();
+    });
+
+
+    /* --------------------- STUDENT FORM --------------------- */
+    document.getElementById("studentForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const embed = {
+        title: "🎓 Student Registration",
+        color: 3447003,
+        fields: [
+          { name: "Name", value: s_name.value },
+          { name: "Age", value: s_age.value },
+          { name: "Class", value: s_class.value },
+          { name: "School/College", value: s_school.value },
+          { name: "Phone", value: s_phone.value },
+          { name: "Email", value: s_email.value },
+          { name: "Reason", value: s_reason.value || "N/A" }
+        ],
+        timestamp: new Date()
+      };
+
+      const data = new FormData();
+      data.append("payload_json", JSON.stringify({ username: "MAATRAM Student Bot", embeds: [embed] }));
+
+      const file = s_file.files[0];
+      if (file) data.append("file", file);
+
+      sendToDiscord(data);
+      e.target.reset();
+    });
+/* ---------------- LEAF FALLING ANIMATION ---------------- */
+
+(function leafParticles(){
+  const canvas = document.getElementById('leafCanvas');
+  const ctx = canvas.getContext('2d');
+  let W = canvas.width = innerWidth;
+  let H = canvas.height = innerHeight;
+
+  window.addEventListener('resize', () => {
+    W = canvas.width = innerWidth;
+    H = canvas.height = innerHeight;
+  });
+
+  // small leaf shape generator
+  function leafSprite(size, hue=120){
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const cctx = c.getContext('2d');
+    cctx.translate(size/2, size/2);
+    cctx.fillStyle = `hsl(${hue} 40% 45%)`;
+
+    cctx.beginPath();
+    cctx.moveTo(0, -size*0.25);
+    cctx.quadraticCurveTo(size*0.4, -size*0.15, size*0.25, size*0.25);
+    cctx.quadraticCurveTo(0, size*0.4, -size*0.25, size*0.25);
+    cctx.quadraticCurveTo(-size*0.4, -size*0.15, 0, -size*0.25);
+    cctx.fill();
+    return c;
+  }
+
+  class Leaf {
+    constructor(){
+      this.reset();
+    }
+    reset(){
+      this.size = 10 + Math.random()*22;
+      this.x = Math.random()*W;
+      this.y = -10 - Math.random()*H*0.2;
+      this.vx = -0.3 + Math.random()*0.6;
+      this.vy = 0.4 + Math.random()*1;
+      this.rot = Math.random()*Math.PI*2;
+      this.vr = (-0.01 + Math.random()*0.02);
+      this.sprite = leafSprite(Math.round(this.size), 90 + Math.random()*60);
+      this.life = 0;
+      this.maxLife = 600 + Math.random()*800;
+    }
+    update(){
+      this.x += this.vx;
+      this.y += this.vy;
+      this.rot += this.vr;
+      this.life++;
+      if(this.y > H + 50 || this.x < -50 || this.x > W + 50 || this.life>this.maxLife) this.reset();
+    }
+    draw(ctx){
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rot);
+      ctx.drawImage(this.sprite, -this.size/2, -this.size/2, this.size, this.size);
+      ctx.restore();
+    }
+  }
+
+  const leaves = [];
+  for(let i=0;i<60;i++) leaves.push(new Leaf());
+
+  function animate(){
+    ctx.clearRect(0,0,W,H);
+    for(const l of leaves){
+      l.update();
+      l.draw(ctx);
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+
+  </script>
+
+</body>
+</html>

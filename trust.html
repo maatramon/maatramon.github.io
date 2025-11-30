@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MAATRAM ON – Trust Works Gallery</title>
+  <meta name="description" content="Photo gallery of MAATRAM ON trust activities including tree plantation, awareness programs, river cleaning and community work." />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            maatramGreen: "#2e7d32",
+            maatramDark: "#1b5e20",
+          }
+        }
+      }
+    }
+
+
+  
+  </script>
+
+  <style>
+    .glass {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(6px);
+    }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      padding: 20px;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.show { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 10px;
+    }
+
+        /* ✨ Glow Light Beams */
+.light-beams {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% -20%, rgba(85,255,150,0.15), transparent 70%),
+              radial-gradient(circle at 20% 10%, rgba(120,255,200,0.12), transparent 70%),
+              radial-gradient(circle at 80% 20%, rgba(50,255,180,0.15), transparent 70%);
+  filter: blur(70px);
+  z-index: -8;
+  animation: beamShift 10s infinite alternate ease-in-out;
+}
+
+@keyframes beamShift {
+  0% { transform: translateY(0px) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-35px) scale(1.1); opacity: 0.8; }
+  100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+}
+  </style>
+</head>
+
+<body class="bg-slate-900 text-white">
+<canvas id="leafCanvas" class="fixed inset-0 -z-10 pointer-events-none"></canvas>
+
+<!-- Floating Clouds -->
+
+<!-- Glow Light Beams -->
+<div class="light-beams pointer-events-none"></div>
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 bg-slate-900/70 backdrop-blur-md z-50 p-4">
+    <nav class="max-w-7xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo.jpeg" class="w-12 h-12 rounded-full border border-white/20">
+        <span class="font-bold">MAATRAM ON</span>
+      </a>
+      
+      <div class="hidden md:flex gap-6 text-sm">
+        <a href="index.html" class="hover:text-green-300">Home</a>
+        <a href="projects.html" class="hover:text-green-300">Projects</a>
+        <a href="students.html" class="hover:text-green-300">Students</a>
+        <a href="gallery.html" class="text-green-300">Gallery</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="pt-32 pb-16 text-center px-6">
+    <h1 class="text-4xl font-bold text-green-300">📸 Trust Works Gallery</h1>
+    <p class="mt-4 max-w-2xl mx-auto text-slate-300">
+      A visual collection of all MAATRAM ON trust activities including tree plantation, river cleaning,
+      community welfare, environmental awareness and volunteer events.
+    </p>
+  </section>
+
+  <!-- CATEGORY FILTERS (non-functional but UI-ready) -->
+  <section class="max-w-6xl mx-auto px-4 mb-10">
+    <div class="flex flex-wrap justify-center gap-3">
+    </div>
+  </section>
+
+  <!-- GALLERY GRID -->
+  <section class="max-w-7xl mx-auto px-6 pb-20">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Replace these images with your trust activity photos -->
+      <img src="trust1.jpg" class="rounded-xl shadow-xl cursor-pointer hover:scale-105 transition" data-index="0">
+      <img src="trust2.jpg" class="rounded-xl shadow-xl cursor-pointer hover:scale-105 transition" data-index="1">
+      <img src="trust3.jpg" class="rounded-xl shadow-xl cursor-pointer hover:scale-105 transition" data-index="2">
+      <img src="trust4.jpg" class="rounded-xl shadow-xl cursor-pointer hover:scale-105 transition" data-index="3">
+      <img src="trust5.jpg" class="rounded-xl shadow-xl cursor-pointer hover:scale-105 transition" data-index="4">
+      <img src="trust6.jpg" class="rounded-xl shadow-xl cursor-pointer hover:scale-105 transition" data-index="5">
+      <img src="trust7.jpg" class="rounded-xl shadow-xl cursor-pointer hover:scale-105 transition" data-index="6">
+      <img src="trust8.jpg" class="rounded-xl shadow-xl cursor-pointer hover:scale-105 transition" data-index="7">
+      <img src="trust9.jpg" class="rounded-xl shadow-xl cursor-pointer hover:scale-105 transition" data-index="8">
+       <img src="trust10.jpg" class="rounded-xl shadow-xl cursor-pointer hover:scale-105 transition" data-index="9">
+       <img src="trust11.jpg" class="rounded-xl shadow-xl cursor-pointer hover:scale-105 transition" data-index="10">
+
+    </div>
+  </section>
+
+  <!-- LIGHTBOX VIEWER -->
+  <div id="lightbox" class="lightbox">
+    <button id="closeLb" class="absolute top-8 right-8 text-white text-3xl">✕</button>
+    <button id="prevLb" class="absolute left-6 top-1/2 -translate-y-1/2 text-white text-4xl">‹</button>
+    <img id="lbImg" src="">
+    <button id="nextLb" class="absolute right-6 top-1/2 -translate-y-1/2 text-white text-4xl">›</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="py-8 text-center text-slate-400 border-t border-white/10">
+    © <span id="year"></span> MAATRAM ON | Trust Works Gallery
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const images = [...document.querySelectorAll("img[data-index]")];
+    const lightbox = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    let current = 0;
+
+    function showImg(i) {
+      current = i;
+      lbImg.src = images[i].src;
+      lightbox.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    images.forEach(img => {
+      img.onclick = () => showImg(Number(img.dataset.index));
+    });
+
+    document.getElementById("closeLb").onclick = () => {
+      lightbox.classList.remove("show");
+      document.body.style.overflow = "auto";
+    };
+
+    document.getElementById("prevLb").onclick = () => {
+      current = (current - 1 + images.length) % images.length;
+      showImg(current);
+    };
+
+    document.getElementById("nextLb").onclick = () => {
+      current = (current + 1) % images.length;
+      showImg(current);
+    };
+
+
+
+  </script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          maatramGreen: "#2e7d32",
+          maatramDark: "#1b5e20"
+        }
+      }
+    }
+  };
+
+  /*-------------- LEAF FALLING ANIMATION ---------------- */
+
+  function leafParticles() {
+    const canvas = document.getElementById('leafCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    });
+
+    function leafSprite(size, hue = 120) {
+      const c = document.createElement('canvas');
+      c.width = c.height = size;
+      const cctx = c.getContext('2d');
+      cctx.translate(size / 2, size / 2);
+      cctx.fillStyle = `hsl(${hue} 40% 45%)`;
+
+      cctx.beginPath();
+      cctx.moveTo(0, -size * 0.25);
+      cctx.quadraticCurveTo(size * 0.4, -size * 0.15, size * 0.25, size * 0.25);
+      cctx.quadraticCurveTo(0, size * 0.4, -size * 0.25, size * 0.25);
+      cctx.quadraticCurveTo(-size * 0.4, -size * 0.15, 0, -size * 0.25);
+      cctx.fill();
+      return c;
+    }
+
+    class Leaf {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.size = 10 + Math.random() * 22;
+        this.x = Math.random() * W;
+        this.y = -10 - Math.random() * H * 0.2;
+        this.vx = -0.3 + Math.random() * 0.6;
+        this.vy = 0.4 + Math.random() * 1;
+        this.rot = Math.random() * Math.PI * 2;
+        this.vr = (-0.01 + Math.random() * 0.02);
+        this.sprite = leafSprite(Math.round(this.size), 90 + Math.random() * 60);
+        this.life = 0;
+        this.maxLife = 600 + Math.random() * 800;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.rot += this.vr;
+        this.life++;
+        if (
+          this.y > H + 50 ||
+          this.x < -50 ||
+          this.x > W + 50 ||
+          this.life > this.maxLife
+        ) this.reset();
+      }
+      draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rot);
+        ctx.drawImage(this.sprite, -this.size / 2, -this.size / 2, this.size, this.size);
+        ctx.restore();
+      }
+    }
+
+    const leaves = [];
+    for (let i = 0; i < 60; i++) leaves.push(new Leaf());
+
+    function animate() {
+      ctx.clearRect(0, 0, W, H);
+      for (const l of leaves) {
+        l.update();
+        l.draw(ctx);
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  window.onload = leafParticles;
+</script>
+
+</body>
+</html>
