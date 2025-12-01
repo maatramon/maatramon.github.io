@@ -1,636 +1,728 @@
-  <!doctype html>
-  <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>MAATRAM ON — Environment & Eco View Projects</title>
-    <meta name="description" content="MAATRAM ON — environmental NGO focused on tree planting, water conservation, waste management and community engagement." />
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MAATRAM ON — Environment & Eco View Projects</title>
+  <meta name="description" content="MAATRAM ON — environmental NGO focused on tree planting, water conservation, waste management and community engagement." />
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              maatramGreen: '#2e7d32',
-              maatramLight: '#a5d6a7',
-              maatramDark: '#1b5e20'
-            }
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            maatramGreen: '#2e7d32',
+            maatramLight: '#a5d6a7',
+            maatramDark: '#1b5e20'
           }
         }
       }
-    </script>
+    }
+  </script>
 
-    <style>
-      :root {
-        --bg-dark: #0f1724;
+  <style>
+    :root {
+      --bg-dark: #0f1724;
+    }
+
+    html,body { height:100%; margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: var(--bg-dark); }
+
+    /* Intro video container */
+    #introVideoContainer {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, rgba(6,95,70,0.75), rgba(0,0,0,0.65));
+      pointer-events: none;
+    }
+    #introVideo {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+      display:block;
+    }
+
+    /* Background after intro */
+    #bgAfter {
+      position: fixed;
+      inset: 0;
+      z-index: -20;
+      background-image: url('bg-after.jpg'); /* replace with your static background image */
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.65);
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    /* Light beams (hidden by default) */
+    .light-beams {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% -20%, rgba(85,255,150,0.14), transparent 65%),
+        radial-gradient(circle at 20% 10%, rgba(120,255,200,0.11), transparent 65%),
+        radial-gradient(circle at 80% 20%, rgba(50,255,180,0.12), transparent 65%);
+      filter: blur(64px);
+      z-index: -12;
+      opacity: 0;
+      transition: opacity 1.8s ease-in-out;
+    }
+
+    /* Hero overlay */
+    .hero-overlay {
+      background: linear-gradient(180deg, rgba(8,40,20,0.32), rgba(2,8,6,0.6));
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* Glass card */
+    .glass {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(6px);
+    }
+
+    /* Cinematic fade classes */
+    .fade-out { opacity: 0; transition: opacity 1.2s ease-out; }
+    #pageContent { opacity: 0; transform: translateY(28px); transition: opacity 1.2s ease-out, transform 1.2s ease-out; }
+    .page-visible { opacity: 1 !important; transform: translateY(0) !important; }
+
+    /* Stagger reveal items */
+    .reveal-item { opacity: 0; transform: translateY(18px); transition: opacity 0.9s ease-out, transform 0.9s ease-out; }
+    .reveal-show { opacity: 1 !important; transform: translateY(0) !important; }
+
+    /* small helper */
+    .shadow-soft { box-shadow: 0 8px 30px rgba(2,8,6,0.6); }
+
+    /* Buttons glow */
+    .glow-btn {
+      box-shadow: 0 0 12px rgba(46,125,50,0.45);
+      transition: box-shadow .28s ease, transform .18s ease;
+    }
+    .glow-btn:hover {
+      box-shadow: 0 0 28px rgba(76,175,80,0.85);
+      transform: translateY(-2px);
+    }
+
+    /* Google Translate styles */
+    .goog-te-banner-frame {
+      display: none !important;
+    }
+    
+    .skiptranslate iframe {
+      display: none !important;
+    }
+    
+    body {
+      top: 0 !important;
+    }
+    
+    /* Style the Google Translate dropdown */
+    .goog-te-gadget {
+      font-family: inherit !important;
+    }
+    
+    .goog-te-gadget-simple {
+      background-color: transparent !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      padding: 6px 10px !important;
+      border-radius: 6px !important;
+      font-size: 14px !important;
+      cursor: pointer !important;
+    }
+    
+    .goog-te-menu-value {
+      color: white !important;
+    }
+    
+    .goog-te-menu-value span {
+      color: white !important;
+    }
+    
+    .goog-te-menu-value:hover {
+      color: #bbf7d0 !important;
+    }
+    
+    .goog-te-menu-value span:hover {
+      color: #bbf7d0 !important;
+    }
+    
+    .goog-te-gadget img {
+      display: none !important;
+    }
+    
+    /* Hide the "Powered by Google" text */
+    .goog-logo-link {
+      display: none !important;
+    }
+    
+    .goog-te-gadget .goog-te-combo {
+      margin: 0 !important;
+      padding: 4px !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+      color: white !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      border-radius: 4px !important;
+    }
+    
+    /* Style the dropdown options */
+    .goog-te-combo option {
+      background: #1e293b !important;
+      color: white !important;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 640px) {
+      #introVideo { object-position: center top; }
+      .hero-overlay { background: linear-gradient(180deg, rgba(8,40,20,0.45), rgba(2,8,6,0.7)); }
+      /* Hide Google Translate on mobile to save space */
+      .goog-te-gadget-simple {
+        display: none !important;
       }
+    }
 
-      html,body { height:100%; margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: var(--bg-dark); }
+    /* footer small */
+    footer { background: rgba(3,7,11,0.6); }
+  </style>
+</head>
+<body class="antialiased text-slate-100">
 
-      /* Intro video container */
-      #introVideoContainer {
-        position: fixed;
-        inset: 0;
-        z-index: 60;
-        display: grid;
-        place-items: center;
-        background: linear-gradient(180deg, rgba(6,95,70,0.75), rgba(0,0,0,0.65));
-        pointer-events: none;
-      }
-      #introVideo {
-        width: 100%;
-        height: 100vh;
-        object-fit: cover;
-        display:block;
-      }
+  <!-- Background image (shown after intro) -->
+  <div id="bgAfter" aria-hidden="true"></div>
 
-      /* Background after intro */
-      #bgAfter {
-        position: fixed;
-        inset: 0;
-        z-index: -20;
-        background-image: url('bg-after.jpg'); /* replace with your static background image */
-        background-size: cover;
-        background-position: center;
-        filter: brightness(0.65);
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-      }
+  <!-- Light beams -->
+  <div class="light-beams pointer-events-none" aria-hidden="true"></div>
 
-      /* Canvas for leaves */
-     #leafCanvas {
-    position: fixed;
-    inset: 0;
-    z-index: 1;        /* <-- move ABOVE background */
-    pointer-events: none;
-  }
+  <!-- Intro video -->
+  <div id="introVideoContainer" role="presentation" aria-hidden="false">
+    <video id="introVideo" autoplay muted playsinline>
+      <source src="intro1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
 
-      /* Light beams (hidden by default) */
-      .light-beams {
-        position: fixed;
-        inset: 0;
-        background:
-          radial-gradient(circle at 50% -20%, rgba(85,255,150,0.14), transparent 65%),
-          radial-gradient(circle at 20% 10%, rgba(120,255,200,0.11), transparent 65%),
-          radial-gradient(circle at 80% 20%, rgba(50,255,180,0.12), transparent 65%);
-        filter: blur(64px);
-        z-index: -12;
-        opacity: 0;
-        transition: opacity 1.8s ease-in-out;
-      }
-
-      /* Hero overlay */
-      .hero-overlay {
-        background: linear-gradient(180deg, rgba(8,40,20,0.32), rgba(2,8,6,0.6));
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-      }
-
-      /* Glass card */
-      .glass {
-        background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(255,255,255,0.06);
-        backdrop-filter: blur(6px);
-      }
-
-      /* Cinematic fade classes */
-      .fade-out { opacity: 0; transition: opacity 1.2s ease-out; }
-      #pageContent { opacity: 0; transform: translateY(28px); transition: opacity 1.2s ease-out, transform 1.2s ease-out; }
-      .page-visible { opacity: 1 !important; transform: translateY(0) !important; }
-
-      /* Stagger reveal items */
-      .reveal-item { opacity: 0; transform: translateY(18px); transition: opacity 0.9s ease-out, transform 0.9s ease-out; }
-      .reveal-show { opacity: 1 !important; transform: translateY(0) !important; }
-
-      /* small helper */
-      .shadow-soft { box-shadow: 0 8px 30px rgba(2,8,6,0.6); }
-
-      /* Buttons glow */
-      .glow-btn {
-        box-shadow: 0 0 12px rgba(46,125,50,0.45);
-        transition: box-shadow .28s ease, transform .18s ease;
-      }
-      .glow-btn:hover {
-        box-shadow: 0 0 28px rgba(76,175,80,0.85);
-        transform: translateY(-2px);
-      }
-
-      /* Responsive tweaks */
-      @media (max-width: 640px) {
-        #introVideo { object-position: center top; }
-        .hero-overlay { background: linear-gradient(180deg, rgba(8,40,20,0.45), rgba(2,8,6,0.7)); }
-      }
-
-      /* footer small */
-      footer { background: rgba(3,7,11,0.6); }
-    </style>
-  </head>
-  <body class="antialiased text-slate-100">
-
-    <!-- Background image (shown after intro) -->
-    <div id="bgAfter" aria-hidden="true"></div>
-
-    <!-- Light beams -->
-    <div class="light-beams pointer-events-none" aria-hidden="true"></div>
-
-    <!-- Leaf canvas (particles start AFTER reveal) -->
-
-    <!-- Intro video -->
-    <div id="introVideoContainer" role="presentation" aria-hidden="false">
-      <video id="introVideo" autoplay muted playsinline>
-        <source src="intro1.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-center z-50 pointer-events-none">
-        <img src="logo.jpeg" alt="MAATRAM ON logo" class="w-20 h-20 rounded-full border-2 border-white/20 mx-auto shadow-lg" />
-        <p class="mt-2 text-sm text-green-100/80">MAATRAM ON — Change for Nature</p>
-      </div>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-center z-50 pointer-events-none">
+      <img src="logo.jpeg" alt="MAATRAM ON logo" class="w-20 h-20 rounded-full border-2 border-white/20 mx-auto shadow-lg" />
+      <p class="mt-2 text-sm text-green-100/80">MAATRAM ON — Change for Nature</p>
     </div>
+  </div>
 
-    <!-- Main page content (hidden at first) -->
-    <div id="pageContent" class="relative z-10">
+  <!-- Main page content (hidden at first) -->
+  <div id="pageContent" class="relative z-10">
 
-      <!-- NAVBAR -->
-      <header class="fixed top-4 left-0 right-0 z-50 px-4 sm:px-8">
-        <nav class="max-w-6xl mx-auto flex items-center justify-between glass px-4 py-2 rounded-full shadow-soft">
-          <a href="#" class="flex items-center gap-3">
-            <img src="logo.jpeg" alt="logo" class="w-12 h-12 rounded-full border-2 border-white/20" />
-            <div class="hidden sm:block">
-              <div class="font-bold text-white">MAATRAM ON</div>
-              <div class="text-xs text-green-200">Environmental Trust</div>
-            </div>
-          </a>
+    <!-- NAVBAR -->
+    <header class="fixed top-4 left-0 right-0 z-50 px-4 sm:px-8">
+      <nav class="max-w-6xl mx-auto flex items-center justify-between glass px-4 py-2 rounded-full shadow-soft">
+        <a href="#" class="flex items-center gap-3">
+          <img src="logo.jpeg" alt="logo" class="w-12 h-12 rounded-full border-2 border-white/20" />
+          <div class="hidden sm:block">
+            <div class="font-bold text-white">MAATRAM ON</div>
+            <div class="text-xs text-green-200">Environmental Trust</div>
+          </div>
+        </a>
 
-          <div class="hidden md:flex items-center gap-6 text-sm">
-            <a href="#" class="hover:text-green-200 reveal-item">Home</a>
-            <a href="projects.html" class="hover:text-green-200 reveal-item">Projects</a>
-            <a href="student.html" class="hover:text-green-200 reveal-item">Student</a>
-            <a href="contact.html" class="hover:text-green-200 reveal-item">Contact</a>
-            <a href="obj.html" class="hover:text-green-200 reveal-item">Objectives</a>
+        <div class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#" class="hover:text-green-200 reveal-item">Home</a>
+          <a href="projects.html" class="hover:text-green-200 reveal-item">Projects</a>
+          <a href="student.html" class="hover:text-green-200 reveal-item">Student</a>
+          <a href="contact.html" class="hover:text-green-200 reveal-item">Contact</a>
+          <a href="obj.html" class="hover:text-green-200 reveal-item">Objectives</a>
+          
+          <!-- Google Translate Widget -->
+          <div id="google_translate_element" class="ml-4 reveal-item"></div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <main class="min-h-screen relative flex items-center justify-center">
+      <section class="w-full relative overflow-hidden text-center">
+        <div class="hero-overlay" aria-hidden="true"></div>
+
+        <div class="max-w-4xl mx-auto relative z-20 px-6 py-36">
+          <!-- Centered Logo -->
+          <img src="logo.jpeg" alt="MAATRAM ON logo"
+               class="w-36 h-36 mx-auto rounded-full shadow-lg border-4 border-white/20 mb-6 reveal-item" />
+
+          <h1 class="text-5xl sm:text-6xl font-extrabold text-white reveal-item">
+            MAATRAM ON
+          </h1>
+
+          <p class="text-green-300 text-2xl sm:text-3xl mt-2 font-semibold reveal-item">
+            Environment & Eco View Projects Organisation
+          </p>
+
+          <p class="mt-6 text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto reveal-item">
+            Creating a sustainable tomorrow through responsible action today. We mobilize communities for
+            tree planting, water conservation, waste management, and eco-education.
+          </p>
+
+          <div class="mt-10 flex justify-center gap-4">
+            <a href="contact.html"
+               class="px-6 py-3 rounded-full bg-maatramGreen hover:bg-maatramDark shadow glow-btn text-white reveal-item">
+              Join as Volunteer
+            </a>
+            <a href="project1.html"
+               class="px-6 py-3 rounded-full border border-white/10 glass text-white reveal-item">
+              Our Projects
+            </a>
+          </div>
+          <div class="flex gap-4 justify-center mt-8">
+            <a href="contact.html#volunteerFormSection"
+               class="px-6 py-3 bg-green-600 hover:bg-green-700 rounded-full text-white font-semibold reveal-item">
+               Volunteer Registration
+            </a>
+
+            <a href="contact.html#studentFormSection"
+               class="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full text-white font-semibold reveal-item">
+               Student Registration
+            </a>
           </div>
 
-        </nav>
-      </header>
-
-      <!-- HERO -->
-      <main class="min-h-screen relative flex items-center justify-center">
-        <section class="w-full relative overflow-hidden text-center">
-          <div class="hero-overlay" aria-hidden="true"></div>
-
-          <div class="max-w-4xl mx-auto relative z-20 px-6 py-36">
-            <!-- Centered Logo -->
-            <img src="logo.jpeg" alt="MAATRAM ON logo"
-                 class="w-36 h-36 mx-auto rounded-full shadow-lg border-4 border-white/20 mb-6 reveal-item" />
-
-            <h1 class="text-5xl sm:text-6xl font-extrabold text-white reveal-item">
-              MAATRAM ON
-            </h1>
-
-            <p class="text-green-300 text-2xl sm:text-3xl mt-2 font-semibold reveal-item">
-              Environment & Eco View Projects Organisation
-            </p>
-
-            <p class="mt-6 text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto reveal-item">
-              Creating a sustainable tomorrow through responsible action today. We mobilize communities for
-              tree planting, water conservation, waste management, and eco-education.
-            </p>
-
-            <div class="mt-10 flex justify-center gap-4">
-              <a href="contact.html"
-                 class="px-6 py-3 rounded-full bg-maatramGreen hover:bg-maatramDark shadow glow-btn text-white reveal-item">
-                Join as Volunteer
-              </a>
-              <a href="project1.html"
-                 class="px-6 py-3 rounded-full border border-white/10 glass text-white reveal-item">
-                Our Projects
-              </a>
-            </div>
-<div class="flex gap-4 justify-center mt-8">
-  <a href="contact.html#volunteerFormSection"
-     class="px-6 py-3 bg-green-600 hover:bg-green-700 rounded-full text-white font-semibold">
-     Volunteer Registration
-  </a>
-
-  <a href="contact.html#studentFormSection"
-     class="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full text-white font-semibold">
-     Student Registration
-  </a>
-</div>
-
-            <!-- Small stats -->
-            <div class="mt-12 grid grid-cols-3 gap-6 max-w-md mx-auto text-center reveal-item">
-              <div>
-                <div class="text-3xl font-bold text-green-200" data-count-target="580">0</div>
-                <p class="text-xs text-slate-300">Trees Planted</p>
-              </div>
-              <div>
-                <div class="text-3xl font-bold text-green-200" data-count-target="120">0</div>
-                <p class="text-xs text-slate-300">Volunteers</p>
-              </div>
-              <div>
-                <div class="text-3xl font-bold text-green-200" data-count-target="45">0</div>
-                <p class="text-xs text-slate-300">Projects</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <!-- ABOUT -->
-      <section id="about" class="py-16 px-6">
-        <div class="max-w-6xl mx-auto">
-          <div class="grid md:grid-cols-2 gap-8 items-center">
+          <!-- Small stats -->
+          <div class="mt-12 grid grid-cols-3 gap-6 max-w-md mx-auto text-center reveal-item">
             <div>
-              <h2 class="text-3xl font-bold text-green-200 reveal-item">About Our Environmental Mission</h2>
-              <p class="mt-4 text-slate-200 leading-relaxed reveal-item">
-                Maatram On is committed to protecting the environment by promoting sustainability, ecological awareness,
-                and responsible community development. Our mission is to restore natural balance, encourage green habits,
-                and inspire society to contribute to a cleaner and healthier planet.
-              </p>
-              <p class="mt-4 text-slate-200 reveal-item">
-                Founded on <strong class="text-green-300">09 October 2025</strong>, we carry out localized projects that build capacity and create measurable ecological improvements.
-              </p>
-
-              <a href="obj.html"
-                 class="inline-block mt-6 px-6 py-3 rounded-full font-semibold text-white bg-maatramGreen glow-btn reveal-item">
-                 View Full Objectives
-              </a>
+              <div class="text-3xl font-bold text-green-200" data-count-target="580">0</div>
+              <p class="text-xs text-slate-300">Trees Planted</p>
             </div>
-
             <div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="glass p-5 rounded-lg reveal-item">
-                  <h4 class="font-semibold text-green-200">Vision</h4>
-                  <p class="mt-2 text-slate-200 text-sm">A world where people live in harmony with nature.</p>
-                </div>
-                <div class="glass p-5 rounded-lg reveal-item">
-                  <h4 class="font-semibold text-green-200">Mission</h4>
-                  <p class="mt-2 text-slate-200 text-sm">Restore natural balance through community-led green action.</p>
-                </div>
-                <div class="glass p-5 rounded-lg reveal-item">
-                  <h4 class="font-semibold text-green-200">Values</h4>
-                  <p class="mt-2 text-slate-200 text-sm">Sustainability · Inclusion · Education · Long-term thinking</p>
-                </div>
-                <div class="glass p-5 rounded-lg reveal-item">
-                  <h4 class="font-semibold text-green-200">Core Focus</h4>
-                  <p class="mt-2 text-slate-200 text-sm">Trees · Water · Waste · Awareness</p>
-                </div>
-              </div>
+              <div class="text-3xl font-bold text-green-200" data-count-target="120">0</div>
+              <p class="text-xs text-slate-300">Volunteers</p>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-green-200" data-count-target="45">0</div>
+              <p class="text-xs text-slate-300">Projects</p>
             </div>
           </div>
         </div>
       </section>
+    </main>
 
-      <!-- INITIATIVES -->
-      <section id="initiatives" class="py-16 px-6 bg-gradient-to-b from-slate-900/40 to-slate-900/60">
-        <div class="max-w-6xl mx-auto">
-          <h2 class="text-3xl font-bold text-green-200 text-center reveal-item">Our Key Environmental Initiatives</h2>
-          <p class="mt-2 text-center text-slate-300 max-w-2xl mx-auto reveal-item">Action areas where we drive impact on ground.</p>
+    <!-- ABOUT -->
+    <section id="about" class="py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h2 class="text-3xl font-bold text-green-200 reveal-item">About Our Environmental Mission</h2>
+            <p class="mt-4 text-slate-200 leading-relaxed reveal-item">
+              Maatram On is committed to protecting the environment by promoting sustainability, ecological awareness,
+              and responsible community development. Our mission is to restore natural balance, encourage green habits,
+              and inspire society to contribute to a cleaner and healthier planet.
+            </p>
+            <p class="mt-4 text-slate-200 reveal-item">
+              Founded on <strong class="text-green-300">09 October 2025</strong>, we carry out localized projects that build capacity and create measurable ecological improvements.
+            </p>
 
-          <div class="grid md:grid-cols-3 gap-6 mt-8">
-            <article class="glass rounded-xl p-6 shadow-lg reveal-item">
-              <h3 class="text-lg font-semibold text-green-300">🌱 Tree Plantation Drives</h3>
-              <p class="mt-3 text-slate-200 text-sm">Large-scale tree planting with community ownership and sapling care training to ensure survival and growth.</p>
-            </article>
+            <a href="obj.html"
+               class="inline-block mt-6 px-6 py-3 rounded-full font-semibold text-white bg-maatramGreen glow-btn reveal-item">
+               View Full Objectives
+            </a>
+          </div>
 
-            <article class="glass rounded-xl p-6 shadow-lg reveal-item">
-              <h3 class="text-lg font-semibold text-green-300">♻️ Waste Management & Recycling</h3>
-              <p class="mt-3 text-slate-200 text-sm">Workshops on segregation, composting sites, and campaigns to reduce single-use plastics.</p>
-            </article>
-
-            <article class="glass rounded-xl p-6 shadow-lg reveal-item">
-              <h3 class="text-lg font-semibold text-green-300">💧 Water Conservation</h3>
-              <p class="mt-3 text-slate-200 text-sm">Rainwater harvesting implementation, greywater reuse guidance and water-wise gardening methods.</p>
-            </article>
+          <div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="glass p-5 rounded-lg reveal-item">
+                <h4 class="font-semibold text-green-200">Vision</h4>
+                <p class="mt-2 text-slate-200 text-sm">A world where people live in harmony with nature.</p>
+              </div>
+              <div class="glass p-5 rounded-lg reveal-item">
+                <h4 class="font-semibold text-green-200">Mission</h4>
+                <p class="mt-2 text-slate-200 text-sm">Restore natural balance through community-led green action.</p>
+              </div>
+              <div class="glass p-5 rounded-lg reveal-item">
+                <h4 class="font-semibold text-green-200">Values</h4>
+                <p class="mt-2 text-slate-200 text-sm">Sustainability · Inclusion · Education · Long-term thinking</p>
+              </div>
+              <div class="glass p-5 rounded-lg reveal-item">
+                <h4 class="font-semibold text-green-200">Core Focus</h4>
+                <p class="mt-2 text-slate-200 text-sm">Trees · Water · Waste · Awareness</p>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-
-     <!-- PROJECTS -->
-  <section id="projects" class="py-16 px-6">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold text-green-200 text-center reveal-item">
-        Green View & Environmental Monitoring Projects
-      </h2>
-      <p class="mt-2 text-center text-slate-300 reveal-item">
-        Beautification, urban greening and monitoring for measurable impact.
-      </p>
-
-      <div class="grid md:grid-cols-3 gap-6 mt-8">
-
-        <!-- 🔗 PROJECT 1 — Kitchen Garden -->
-        <a href="project1.html" class="rounded-xl overflow-hidden shadow-lg glass reveal-item block hover:scale-105 transition">
-          <img src="trust6.jpg" class="w-full h-44 object-cover" />
-          <div class="p-5">
-            <h4 class="font-semibold text-green-200">KITCHEN GARDEN</h4>
-            <p class="mt-2 text-slate-200 text-sm">
-              Transform unused plots into community mini forests that support biodiversity.
-            </p>
-          </div>
-        </a>
-
-        <!-- 🔗 PROJECT 2 — Solid Waste Disposal -->
-        <a href="projects.html" class="rounded-xl overflow-hidden shadow-lg glass reveal-item block hover:scale-105 transition">
-          <img src="student7.jpg" class="w-full h-44 object-cover" />
-          <div class="p-5">
-            <h4 class="font-semibold text-green-200">SOLID WASTE DISPOSAL</h4>
-            <p class="mt-2 text-slate-200 text-sm">
-              Create tree-lined corridors in residential and industrial zones to reduce heat and pollution.
-            </p>
-          </div>
-        </a>
-
-        <!-- 🔗 PROJECT 3 — Landscape -->
-        <a href="student.html" class="rounded-xl overflow-hidden shadow-lg glass reveal-item block hover:scale-105 transition">
-          <img src="front3.jpg" class="w-full h-44 object-cover" />
-          <div class="p-5">
-            <h4 class="font-semibold text-green-200">Landscape & Eco-Viewpoints</h4>
-            <p class="mt-2 text-slate-200 text-sm">
-              Nature-friendly relaxation spots and landscaping to reconnect residents with green spaces.
-            </p>
-          </div>
-        </a>
-
       </div>
+    </section>
+
+    <!-- INITIATIVES -->
+    <section id="initiatives" class="py-16 px-6 bg-gradient-to-b from-slate-900/40 to-slate-900/60">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-green-200 text-center reveal-item">Our Key Environmental Initiatives</h2>
+        <p class="mt-2 text-center text-slate-300 max-w-2xl mx-auto reveal-item">Action areas where we drive impact on ground.</p>
+
+        <div class="grid md:grid-cols-3 gap-6 mt-8">
+          <article class="glass rounded-xl p-6 shadow-lg reveal-item">
+            <h3 class="text-lg font-semibold text-green-300">🌱 Tree Plantation Drives</h3>
+            <p class="mt-3 text-slate-200 text-sm">Large-scale tree planting with community ownership and sapling care training to ensure survival and growth.</p>
+          </article>
+
+          <article class="glass rounded-xl p-6 shadow-lg reveal-item">
+            <h3 class="text-lg font-semibold text-green-300">♻️ Waste Management & Recycling</h3>
+            <p class="mt-3 text-slate-200 text-sm">Workshops on segregation, composting sites, and campaigns to reduce single-use plastics.</p>
+          </article>
+
+          <article class="glass rounded-xl p-6 shadow-lg reveal-item">
+            <h3 class="text-lg font-semibold text-green-300">💧 Water Conservation</h3>
+            <p class="mt-3 text-slate-200 text-sm">Rainwater harvesting implementation, greywater reuse guidance and water-wise gardening methods.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+   <!-- PROJECTS -->
+<section id="projects" class="py-16 px-6">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-green-200 text-center reveal-item">
+      Green View & Environmental Monitoring Projects
+    </h2>
+    <p class="mt-2 text-center text-slate-300 reveal-item">
+      Beautification, urban greening and monitoring for measurable impact.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6 mt-8">
+
+      <!-- 🔗 PROJECT 1 — Kitchen Garden -->
+      <a href="project1.html" class="rounded-xl overflow-hidden shadow-lg glass reveal-item block hover:scale-105 transition">
+        <img src="trust6.jpg" class="w-full h-44 object-cover" />
+        <div class="p-5">
+          <h4 class="font-semibold text-green-200">KITCHEN GARDEN</h4>
+          <p class="mt-2 text-slate-200 text-sm">
+            Transform unused plots into community mini forests that support biodiversity.
+          </p>
+        </div>
+      </a>
+
+      <!-- 🔗 PROJECT 2 — Solid Waste Disposal -->
+      <a href="projects.html" class="rounded-xl overflow-hidden shadow-lg glass reveal-item block hover:scale-105 transition">
+        <img src="student7.jpg" class="w-full h-44 object-cover" />
+        <div class="p-5">
+          <h4 class="font-semibold text-green-200">SOLID WASTE DISPOSAL</h4>
+          <p class="mt-2 text-slate-200 text-sm">
+            Create tree-lined corridors in residential and industrial zones to reduce heat and pollution.
+          </p>
+        </div>
+      </a>
+
+      <!-- 🔗 PROJECT 3 — Landscape -->
+      <a href="student.html" class="rounded-xl overflow-hidden shadow-lg glass reveal-item block hover:scale-105 transition">
+        <img src="front3.jpg" class="w-full h-44 object-cover" />
+        <div class="p-5">
+          <h4 class="font-semibold text-green-200">Landscape & Eco-Viewpoints</h4>
+          <p class="mt-2 text-slate-200 text-sm">
+            Nature-friendly relaxation spots and landscaping to reconnect residents with green spaces.
+          </p>
+        </div>
+      </a>
+
     </div>
-  </section>
+  </div>
+</section>
 
-      <!-- TEAM -->
-      <section id="team" class="py-16 px-6 bg-gradient-to-b from-slate-900/30 to-slate-900/70">
-        <div class="max-w-6xl mx-auto">
-          <h2 class="text-4xl font-bold text-green-300 text-center mb-12 reveal-item">🌿 Meet Our Leadership Team</h2>
+    <!-- TEAM -->
+    <section id="team" class="py-16 px-6 bg-gradient-to-b from-slate-900/30 to-slate-900/70">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-green-300 text-center mb-12 reveal-item">🌿 Meet Our Leadership Team</h2>
 
-          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-            <div class="glass p-6 rounded-2xl text-center reveal-item">
-              <img src="suresh.png" alt="L. Suresh" class="w-32 h-32 mx-auto rounded-full border-4 border-green-300/40 shadow-lg object-cover" />
-              <h3 class="mt-4 text-xl font-bold text-green-200">L. Suresh</h3>
-              <p class="text-slate-300">MSW – Community Development</p>
-              <p class="text-green-300 font-semibold mt-1">President</p>
-            </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div class="glass p-6 rounded-2xl text-center reveal-item">
+            <img src="suresh.png" alt="L. Suresh" class="w-32 h-32 mx-auto rounded-full border-4 border-green-300/40 shadow-lg object-cover" />
+            <h3 class="mt-4 text-xl font-bold text-green-200">L. Suresh</h3>
+            <p class="text-slate-300">MSW – Community Development</p>
+            <p class="text-green-300 font-semibold mt-1">President</p>
+          </div>
 
-            <div class="glass p-6 rounded-2xl text-center reveal-item">
-              <img src="boo.jpg" alt="Boopathy" class="w-32 h-32 mx-auto rounded-full border-4 border-green-300/40 shadow-lg object-cover" />
-              <h3 class="mt-4 text-xl font-bold text-green-200">Boopathy Saravanakumar</h3>
-              <p class="text-slate-300">MSW – Social Worker</p>
-              <p class="text-green-300 font-semibold mt-1">Vice President</p>
-            </div>
+          <div class="glass p-6 rounded-2xl text-center reveal-item">
+            <img src="boo.jpg" alt="Boopathy" class="w-32 h-32 mx-auto rounded-full border-4 border-green-300/40 shadow-lg object-cover" />
+            <h3 class="mt-4 text-xl font-bold text-green-200">Boopathy Saravanakumar</h3>
+            <p class="text-slate-300">MSW – Social Worker</p>
+            <p class="text-green-300 font-semibold mt-1">Vice President</p>
+          </div>
 
-            <div class="glass p-6 rounded-2xl text-center reveal-item">
-              <img src="arri.png" alt="Arikrishnan S" class="w-32 h-32 mx-auto rounded-full border-4 border-green-300/40 shadow-lg object-cover" />
-              <h3 class="mt-4 text-xl font-bold text-green-200">Arikrishnan S</h3>
-              <p class="text-slate-300">MSW – Community Development</p>
-              <p class="text-green-300 font-semibold mt-1">Secretary</p>
-            </div>
+          <div class="glass p-6 rounded-2xl text-center reveal-item">
+            <img src="arri.png" alt="Arikrishnan S" class="w-32 h-32 mx-auto rounded-full border-4 border-green-300/40 shadow-lg object-cover" />
+            <h3 class="mt-4 text-xl font-bold text-green-200">Arikrishnan S</h3>
+            <p class="text-slate-300">MSW – Community Development</p>
+            <p class="text-green-300 font-semibold mt-1">Secretary</p>
+          </div>
 
-            <div class="glass p-6 rounded-2xl text-center reveal-item">
-              <img src="balaji.png" alt="Balaji R" class="w-32 h-32 mx-auto rounded-full border-4 border-green-300/40 shadow-lg object-cover" />
-              <h3 class="mt-4 text-xl font-bold text-green-200">Balaji R</h3>
-              <p class="text-slate-300">MSW – Community Development</p>
-              <p class="text-green-300 font-semibold mt-1">Treasurer</p>
-            </div>
+          <div class="glass p-6 rounded-2xl text-center reveal-item">
+            <img src="balaji.png" alt="Balaji R" class="w-32 h-32 mx-auto rounded-full border-4 border-green-300/40 shadow-lg object-cover" />
+            <h3 class="mt-4 text-xl font-bold text-green-200">Balaji R</h3>
+            <p class="text-slate-300">MSW – Community Development</p>
+            <p class="text-green-300 font-semibold mt-1">Treasurer</p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- CONTACT & FOOTER -->
-      <section id="contact" class="py-16 px-6 bg-gradient-to-b from-black/40 to-black/60">
-        <div class="max-w-4xl mx-auto reveal-item">
-          <h2 class="text-3xl font-bold text-green-200 text-center">Get Involved — Contact Us</h2>
-          <p class="mt-2 text-center text-slate-300">Volunteer, collaborate, donate, or host an event. We welcome every small step toward a greener world.</p>
+    <!-- CONTACT & FOOTER -->
+    <section id="contact" class="py-16 px-6 bg-gradient-to-b from-black/40 to-black/60">
+      <div class="max-w-4xl mx-auto reveal-item">
+        <h2 class="text-3xl font-bold text-green-200 text-center">Get Involved — Contact Us</h2>
+        <p class="mt-2 text-center text-slate-300">Volunteer, collaborate, donate, or host an event. We welcome every small step toward a greener world.</p>
 
-          <div class="mt-8 grid md:grid-cols-2 gap-6">
-            <div class="glass p-6 rounded-xl">
-              <h3 class="text-lg font-semibold text-green-200">Contact</h3>
-              <p class="mt-2 text-slate-300 text-sm">Email:Maatramonkovai@gmail.com <strong></strong><br>Phone: <strong>+91 6374105026</strong></p>
-              <a href="contact.html" class="mt-4 inline-block px-4 py-2 bg-maatramGreen text-white rounded-full glow-btn">Open Contact Page</a>
-            </div>
-            <div class="glass p-6 rounded-xl">
-              <h3 class="text-lg font-semibold text-green-200">Location</h3>
-              <p class="mt-2 text-slate-300 text-sm">3/1, Chinnasamy Naidu Layout, Lakshmipuram, Peelamedu, Coimbatore - 641004 Trust</p>
-              <a href="https://www.google.com/maps" target="_blank" class="mt-4 inline-block px-4 py-2 border border-white/10 rounded-full">Open Map</a>
-            </div>
+        <div class="mt-8 grid md:grid-cols-2 gap-6">
+          <div class="glass p-6 rounded-xl">
+            <h3 class="text-lg font-semibold text-green-200">Contact</h3>
+            <p class="mt-2 text-slate-300 text-sm">Email:Maatramonkovai@gmail.com <strong></strong><br>Phone: <strong>+91 6374105026</strong></p>
+            <a href="contact.html" class="mt-4 inline-block px-4 py-2 bg-maatramGreen text-white rounded-full glow-btn">Open Contact Page</a>
+          </div>
+          <div class="glass p-6 rounded-xl">
+            <h3 class="text-lg font-semibold text-green-200">Location</h3>
+            <p class="mt-2 text-slate-300 text-sm">3/1, Chinnasamy Naidu Layout, Lakshmipuram, Peelamedu, Coimbatore - 641004 Trust</p>
+            <a href="https://www.google.com/maps" target="_blank" class="mt-4 inline-block px-4 py-2 border border-white/10 rounded-full">Open Map</a>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <footer class="py-8 px-6 bg-slate-900/80">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div class="flex items-center gap-3">
-            <img src="logo.jpeg" alt="MAATRAM ON" class="w-12 h-12 rounded-full border-2 border-white/10" />
-            <div>
-              <div class="text-white font-semibold">MAATRAM ON</div>
-              <div class="text-xs text-slate-300">Registered Trust • Coimbatore, Tamil Nadu</div>
-            </div>
-          </div>
-
-          <div class="text-slate-300 text-sm">
-            © <span id="year"></span> MAATRAM ON — All rights reserved.
-          </div>
-
-          <div class="flex gap-3 text-slate-300">
-            <a href="#" aria-label="facebook">FB</a>
-            <a href="#" aria-label="instagram">IG</a>
-            <a href="#" aria-label="twitter">TW</a>
+    <footer class="py-8 px-6 bg-slate-900/80">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img src="logo.jpeg" alt="MAATRAM ON" class="w-12 h-12 rounded-full border-2 border-white/10" />
+          <div>
+            <div class="text-white font-semibold">MAATRAM ON</div>
+            <div class="text-xs text-slate-300">Registered Trust • Coimbatore, Tamil Nadu</div>
           </div>
         </div>
-      </footer>
 
-    </div> <!-- end pageContent -->
+        <div class="text-slate-300 text-sm">
+          © <span id="year"></span> MAATRAM ON — All rights reserved.
+        </div>
 
-    <!-- Scripts -->
-    <script>
-      // set year
-      document.getElementById('year').textContent = new Date().getFullYear();
+        <div class="flex gap-3 text-slate-300">
+          <a href="#" aria-label="facebook">FB</a>
+          <a href="#" aria-label="instagram">IG</a>
+          <a href="#" aria-label="twitter">TW</a>
+        </div>
+      </div>
+    </footer>
 
-      // cinematic reveal timeline
-      const introVideo = document.getElementById('introVideo');
-      const introContainer = document.getElementById('introVideoContainer');
-      const bgAfter = document.getElementById('bgAfter');
-      const lightBeams = document.querySelector('.light-beams');
-      const pageContent = document.getElementById('pageContent');
+  </div> <!-- end pageContent -->
 
-      // helper: add reveal-show to all .reveal-item with stagger
-      function staggerReveal(delayStart = 2300, gap = 150) {
-        const items = document.querySelectorAll('.reveal-item');
-        items.forEach((el, i) => {
-          setTimeout(() => el.classList.add('reveal-show'), delayStart + i * gap);
-        });
-      }
+  <!-- Scripts -->
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-      // When intro video ends -> cinematic sequence
-      introVideo.addEventListener('ended', () => {
-        // fade out the intro container
-        introContainer.classList.add('fade-out');
+    // cinematic reveal timeline
+    const introVideo = document.getElementById('introVideo');
+    const introContainer = document.getElementById('introVideoContainer');
+    const bgAfter = document.getElementById('bgAfter');
+    const lightBeams = document.querySelector('.light-beams');
+    const pageContent = document.getElementById('pageContent');
 
-        // after fade-out, hide container and show background
-        setTimeout(() => {
-          introContainer.style.display = 'none';
-          bgAfter.style.opacity = '1';
-        }, 1200);
-
-        // fade in light beams (soft)
-        setTimeout(() => {
-          lightBeams.style.opacity = '1';
-        }, 1500);
-
-        // show page content with lift
-        setTimeout(() => {
-          pageContent.classList.add('page-visible');
-        }, 1800);
-
-        // start stagger reveals
-        staggerReveal(2000, 140);
-
-        // start leaf particles after the page is visible (gives cinematic effect)
-        setTimeout(() => startLeafParticles(), 2100);
+    // helper: add reveal-show to all .reveal-item with stagger
+    function staggerReveal(delayStart = 2300, gap = 150) {
+      const items = document.querySelectorAll('.reveal-item');
+      items.forEach((el, i) => {
+        setTimeout(() => el.classList.add('reveal-show'), delayStart + i * gap);
       });
+    }
 
-      // If the video is not available / user skipped, ensure we still reveal after 1s
-      // (useful during development)
+    // When intro video ends -> cinematic sequence
+    introVideo.addEventListener('ended', () => {
+      // fade out the intro container
+      introContainer.classList.add('fade-out');
+
+      // after fade-out, hide container and show background
       setTimeout(() => {
-        if(!introVideo || introVideo.readyState === 0) {
-          introContainer.style.display = 'none';
-          bgAfter.style.opacity = '1';
-          pageContent.classList.add('page-visible');
-          lightBeams.style.opacity = '1';
-          staggerReveal(100, 120);
-          startLeafParticles();
-        }
-      }, 1400);
+        introContainer.style.display = 'none';
+        bgAfter.style.opacity = '1';
+      }, 1200);
 
-      /* ------------------ Counters (animate once) ------------------ */
-      function animateCount(el, target, duration=1600) {
-        const startTime = performance.now();
-        function step(now) {
-          const prog = Math.min((now - startTime) / duration, 1);
-          const value = Math.floor(prog * target);
-          el.textContent = value.toLocaleString();
-          if(prog < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
+      // fade in light beams (soft)
+      setTimeout(() => {
+        lightBeams.style.opacity = '1';
+      }, 1500);
+
+      // show page content with lift
+      setTimeout(() => {
+        pageContent.classList.add('page-visible');
+      }, 1800);
+
+      // start stagger reveals
+      staggerReveal(2000, 140);
+
+      // start leaf particles after the page is visible (gives cinematic effect)
+      setTimeout(() => startLeafParticles(), 2100);
+    });
+
+    // If the video is not available / user skipped, ensure we still reveal after 1s
+    // (useful during development)
+    setTimeout(() => {
+      if(!introVideo || introVideo.readyState === 0) {
+        introContainer.style.display = 'none';
+        bgAfter.style.opacity = '1';
+        pageContent.classList.add('page-visible');
+        lightBeams.style.opacity = '1';
+        staggerReveal(100, 120);
+        startLeafParticles();
       }
+    }, 1400);
 
-      // trigger impact counters when in view
-      const impactEls = document.querySelectorAll('[data-counter]');
-      const counterObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if(entry.isIntersecting) {
-            const el = entry.target;
-            const key = el.getAttribute('data-counter');
-            let target = parseInt(el.textContent,10) || 0;
-            if(key === 'trees') target = 580;
-            if(key === 'volunteers') target = 120;
-            if(key === 'events') target = 45;
-            animateCount(el, target, 1400);
-            counterObserver.unobserve(el);
-          }
-        });
-      }, {threshold: 0.25});
-      impactEls.forEach(el => counterObserver.observe(el));
-
-      // small hero counters on load
-      document.querySelectorAll('[data-count-target]').forEach(el => {
-        const t = parseInt(el.getAttribute('data-count-target'),10) || 0;
-        setTimeout(()=> animateCount(el, t, 1600), 900);
-      });
-
-      /* ------------------ Leaf particles (canvas) ------------------ */
-      let leafAnimationRunning = false;
-      function startLeafParticles() {
-        if (leafAnimationRunning) return;
-        leafAnimationRunning = true;
-
-        const canvas = document.getElementById('leafCanvas');
-        const ctx = canvas.getContext('2d');
-        let W = canvas.width = innerWidth;
-        let H = canvas.height = innerHeight;
-
-        window.addEventListener('resize', () => {
-          W = canvas.width = innerWidth;
-          H = canvas.height = innerHeight;
-        });
-
-        function leafSprite(size, hue=100) {
-          const c = document.createElement('canvas');
-          c.width = c.height = size;
-          const cctx = c.getContext('2d');
-          cctx.translate(size/2, size/2);
-          cctx.fillStyle = `hsl(${hue} 45% 45%)`;
-          cctx.beginPath();
-          cctx.moveTo(0, -size*0.25);
-          cctx.quadraticCurveTo(size*0.4, -size*0.15, size*0.25, size*0.25);
-          cctx.quadraticCurveTo(0, size*0.4, -size*0.25, size*0.25);
-          cctx.quadraticCurveTo(-size*0.4, -size*0.15, 0, -size*0.25);
-          cctx.fill();
-          return c;
-        }
-
-        class Leaf {
-          constructor() { this.reset(); }
-          reset() {
-            this.size = 10 + Math.random() * 24;
-            this.x = Math.random() * W;
-            this.y = -10 - Math.random() * H * 0.2;
-            this.vx = -0.6 + Math.random() * 1.2;
-            this.vy = 0.4 + Math.random() * 1.1;
-            this.rot = Math.random() * Math.PI * 2;
-            this.vr = (-0.03 + Math.random() * 0.06);
-            this.sprite = leafSprite(Math.round(this.size), 70 + Math.random() * 60);
-            this.life = 0;
-            this.maxLife = 400 + Math.random() * 800;
-          }
-          update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            this.rot += this.vr;
-            this.life++;
-            if (this.y > H + 60 || this.x < -80 || this.x > W + 80 || this.life > this.maxLife) this.reset();
-          }
-          draw(ctx) {
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            ctx.rotate(this.rot);
-            ctx.drawImage(this.sprite, -this.size/2, -this.size/2, this.size, this.size);
-            ctx.restore();
-          }
-        }
-
-        const leaves = [];
-        for (let i=0; i<70; i++) leaves.push(new Leaf());
-
-        function animate() {
-          ctx.clearRect(0,0,W,H);
-          for (const l of leaves) { l.update(); l.draw(ctx); }
-          requestAnimationFrame(animate);
-        }
-        animate();
+    /* ------------------ Counters (animate once) ------------------ */
+    function animateCount(el, target, duration=1600) {
+      const startTime = performance.now();
+      function step(now) {
+        const prog = Math.min((now - startTime) / duration, 1);
+        const value = Math.floor(prog * target);
+        el.textContent = value.toLocaleString();
+        if(prog < 1) requestAnimationFrame(step);
       }
+      requestAnimationFrame(step);
+    }
 
-      /* ------------------ Intersection reveal fallback (for users who scroll into view) ------------------ */
-      const revealItems = document.querySelectorAll('.reveal-item');
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(ent => {
-          if (ent.isIntersecting) {
-            ent.target.classList.add('reveal-show');
-            revealObserver.unobserve(ent.target);
-          }
-        });
-      }, {threshold: 0.12});
-      revealItems.forEach(i => revealObserver.observe(i));
-
-      // small parallax on scroll for hero
-      window.addEventListener('scroll', () => {
-        const hero = document.querySelector('main');
-        if(hero) {
-          const y = Math.max(0, window.scrollY);
-          hero.style.transform = `translateZ(0) translateY(${y * -0.02}px)`;
+    // trigger impact counters when in view
+    const impactEls = document.querySelectorAll('[data-counter]');
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          const el = entry.target;
+          const key = el.getAttribute('data-counter');
+          let target = parseInt(el.textContent,10) || 0;
+          if(key === 'trees') target = 580;
+          if(key === 'volunteers') target = 120;
+          if(key === 'events') target = 45;
+          animateCount(el, target, 1400);
+          counterObserver.unobserve(el);
         }
       });
-    </script>
-  </body>
-  </html>
+    }, {threshold: 0.25});
+    impactEls.forEach(el => counterObserver.observe(el));
+
+    // small hero counters on load
+    document.querySelectorAll('[data-count-target]').forEach(el => {
+      const t = parseInt(el.getAttribute('data-count-target'),10) || 0;
+      setTimeout(()=> animateCount(el, t, 1600), 900);
+    });
+
+    /* ------------------ Intersection reveal fallback (for users who scroll into view) ------------------ */
+    const revealItems = document.querySelectorAll('.reveal-item');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(ent => {
+        if (ent.isIntersecting) {
+          ent.target.classList.add('reveal-show');
+          revealObserver.unobserve(ent.target);
+        }
+      });
+    }, {threshold: 0.12});
+    revealItems.forEach(i => revealObserver.observe(i));
+
+    // small parallax on scroll for hero
+    window.addEventListener('scroll', () => {
+      const hero = document.querySelector('main');
+      if(hero) {
+        const y = Math.max(0, window.scrollY);
+        hero.style.transform = `translateZ(0) translateY(${y * -0.02}px)`;
+      }
+    });
+
+    /* ------------------ Leaf particles (canvas) ------------------ */
+    let leafAnimationRunning = false;
+    function startLeafParticles() {
+      if (leafAnimationRunning) return;
+      leafAnimationRunning = true;
+
+      const canvas = document.getElementById('leafCanvas');
+      const ctx = canvas.getContext('2d');
+      let W = canvas.width = innerWidth;
+      let H = canvas.height = innerHeight;
+
+      window.addEventListener('resize', () => {
+        W = canvas.width = innerWidth;
+        H = canvas.height = innerHeight;
+      });
+
+      function leafSprite(size, hue=100) {
+        const c = document.createElement('canvas');
+        c.width = c.height = size;
+        const cctx = c.getContext('2d');
+        cctx.translate(size/2, size/2);
+        cctx.fillStyle = `hsl(${hue} 45% 45%)`;
+        cctx.beginPath();
+        cctx.moveTo(0, -size*0.25);
+        cctx.quadraticCurveTo(size*0.4, -size*0.15, size*0.25, size*0.25);
+        cctx.quadraticCurveTo(0, size*0.4, -size*0.25, size*0.25);
+        cctx.quadraticCurveTo(-size*0.4, -size*0.15, 0, -size*0.25);
+        cctx.fill();
+        return c;
+      }
+
+      class Leaf {
+        constructor() { this.reset(); }
+        reset() {
+          this.size = 10 + Math.random() * 24;
+          this.x = Math.random() * W;
+          this.y = -10 - Math.random() * H * 0.2;
+          this.vx = -0.6 + Math.random() * 1.2;
+          this.vy = 0.4 + Math.random() * 1.1;
+          this.rot = Math.random() * Math.PI * 2;
+          this.vr = (-0.03 + Math.random() * 0.06);
+          this.sprite = leafSprite(Math.round(this.size), 70 + Math.random() * 60);
+          this.life = 0;
+          this.maxLife = 400 + Math.random() * 800;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.rot += this.vr;
+          this.life++;
+          if (this.y > H + 60 || this.x < -80 || this.x > W + 80 || this.life > this.maxLife) this.reset();
+        }
+        draw(ctx) {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.rot);
+          ctx.drawImage(this.sprite, -this.size/2, -this.size/2, this.size, this.size);
+          ctx.restore();
+        }
+      }
+
+      const leaves = [];
+      for (let i=0; i<70; i++) leaves.push(new Leaf());
+
+      function animate() {
+        ctx.clearRect(0,0,W,H);
+        for (const l of leaves) { l.update(); l.draw(ctx); }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+  </script>
+
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        // You can specify which languages to show
+        includedLanguages: 'en,ta,hi,te,ml,kn',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+      
+      // Style the Google Translate widget to match your theme
+      var style = document.createElement('style');
+      style.textContent = '.goog-te-gadget { font-family: inherit !important; }' +
+                         '.goog-te-gadget-simple { background-color: transparent !important; border: 1px solid rgba(255,255,255,0.2) !important; padding: 6px 10px !important; border-radius: 6px !important; }' +
+                         '.goog-te-menu-value { color: white !important; font-size: 14px !important; }' +
+                         '.goog-te-menu-value:hover { color: #bbf7d0 !important; }' +
+                         '.goog-te-menu-value span[dir="ltr"] { color: white !important; }' +
+                         '.goog-te-menu-value span[dir="ltr"]:hover { color: #bbf7d0 !important; }';
+      document.head.appendChild(style);
+    }
+  </script>
+
+  <!-- Google Translate API -->
+  <script type="text/javascript" 
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
+
+</body>
+</html>
