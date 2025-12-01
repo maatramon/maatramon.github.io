@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -38,10 +38,12 @@
   </style>
 </head>
 
+
+<div id="google_translate_element" class="mt-4"></div>
+
 <body class="bg-slate-900 text-white">
 
-  <!-- Leaf Animation Canvas -->
-  <canvas id="leafCanvas"></canvas>
+<div id="google_translate_element" class="p-4 text-center"></div>
 
   <!-- NAVBAR -->
   <header class="py-5 px-6 sticky top-0 bg-slate-900/70 backdrop-blur-md z-50 border-b border-white/10">
@@ -252,6 +254,17 @@
   </div>
 
 </section>
+<!-- Floating Translate Button -->
+<div id="translate-btn"
+     class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg cursor-pointer z-50">
+  🌍
+</div>
+
+<!-- Hidden Translate Box -->
+<div id="translate-box"
+     class="hidden fixed bottom-20 right-6 bg-slate-800 text-white p-4 rounded-xl shadow-xl z-50 border border-white/10">
+  <div id="google_translate_element"></div>
+</div>
 
 
   <!-- FOOTER -->
@@ -322,6 +335,39 @@
     }
     leafParticles();
   </script>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {pageLanguage: 'en'},
+      'google_translate_element'
+    );
+  }
+</script>
+
+<script type="text/javascript" 
+  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {pageLanguage: 'en'},
+      'google_translate_element'
+    );
+  }
+</script>
+
+<script type="text/javascript"
+  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
+<script>
+  const btn = document.getElementById("translate-btn");
+  const box = document.getElementById("translate-box");
+
+  btn.addEventListener("click", () => {
+    box.classList.toggle("hidden");
+  });
+</script>
 
 </body>
 </html>
