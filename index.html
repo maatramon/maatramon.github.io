@@ -174,30 +174,50 @@
   <!-- Page Content -->
   <div id="pageContent" class="relative z-10">
 
-    <!-- NAVBAR -->
-    <header class="fixed top-4 left-0 right-0 z-50 px-4 sm:px-8">
-      <nav class="max-w-6xl mx-auto flex items-center justify-between glass px-4 py-2 rounded-full shadow-soft">
-        
-        <a href="#" class="flex items-center gap-3">
-          <img src="logo.jpeg" class="w-12 h-12 rounded-full border-2 border-white/20" />
-          <div class="hidden sm:block">
-            <div class="font-bold text-white">MAATRAM ON</div>
-            <div class="text-xs text-green-200">Environmental Trust</div>
-          </div>
-        </a>
+   <nav class="max-w-6xl mx-auto flex items-center justify-between glass px-4 py-2 rounded-full shadow-soft">
 
-        <div class="hidden md:flex items-center gap-6 text-sm">
-          <a href="#" class="hover:text-green-200 reveal-item">Home</a>
-          <a href="projects.html" class="hover:text-green-200 reveal-item">Projects</a>
-          <a href="student.html" class="hover:text-green-200 reveal-item">Student</a>
-          <a href="contact.html" class="hover:text-green-200 reveal-item">Contact</a>
-          <a href="obj.html" class="hover:text-green-200 reveal-item">Objectives</a>
+  <!-- LEFT SIDE BRAND -->
+  <a href="#" class="flex items-center gap-3">
+    <img src="logo.jpeg" class="w-12 h-12 rounded-full border-2 border-white/20" />
+    <div class="hidden sm:block">
+      <div class="font-bold text-white">MAATRAM ON</div>
+      <div class="text-xs text-green-200">Environmental Trust</div>
+    </div>
+  </a>
 
-          <!-- PREMIUM GOOGLE TRANSLATE DROPDOWN -->
-          <div id="google_translate_element" class="ml-4"></div>
-        </div>
-      </nav>
-    </header>
+  <!-- DESKTOP MENU -->
+  <div class="hidden md:flex items-center gap-6 text-sm">
+    <a href="#" class="hover:text-green-200 reveal-item">Home</a>
+    <a href="projects.html" class="hover:text-green-200 reveal-item">Projects</a>
+    <a href="student.html" class="hover:text-green-200 reveal-item">Student</a>
+    <a href="contact.html" class="hover:text-green-200 reveal-item">Contact</a>
+    <a href="obj.html" class="hover:text-green-200 reveal-item">Objectives</a>
+
+    <!-- GOOGLE TRANSLATE -->
+    <div id="google_translate_element" class="ml-4"></div>
+  </div>
+
+  <!-- MOBILE HAMBURGER BUTTON -->
+  <button id="mobileMenuBtn" class="md:hidden text-white text-3xl focus:outline-none">
+    ☰
+  </button>
+</nav>
+
+<!-- MOBILE MENU DROPDOWN -->
+<div id="mobileMenu" class="hidden md:hidden glass mt-3 mx-4 py-4 px-6 rounded-2xl space-y-4 text-center">
+
+  <a href="#" class="block text-white text-lg">Home</a>
+  <a href="projects.html" class="block text-white text-lg">Projects</a>
+  <a href="student.html" class="block text-white text-lg">Student</a>
+  <a href="contact.html" class="block text-white text-lg">Contact</a>
+  <a href="obj.html" class="block text-white text-lg">Objectives</a>
+
+  <!-- MOBILE TRANSLATE DROPDOWN -->
+  <div class="pt-2">
+    <div id="google_translate_element_mobile"></div>
+  </div>
+
+</div>
 
     <!-- HERO -->
     <main class="min-h-screen relative flex items-center justify-center">
@@ -669,6 +689,14 @@
 
 <!-- Google Translate API -->
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+  const mobileBtn = document.getElementById("mobileMenuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  mobileBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+</script>
 
 </body>
 </html>
