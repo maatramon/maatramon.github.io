@@ -65,6 +65,40 @@
   50% { transform: translateY(-35px) scale(1.1); opacity: 0.8; }
   100% { transform: translateY(0px) scale(1); opacity: 0.6; }
 }
+
+/* Google Translate Dropdown Styling */
+#google_translate_element select.goog-te-combo {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  padding: 8px 14px !important;
+  font-size: 14px !important;
+  color: #e0ffe0 !important;
+  border-radius: 8px !important;
+  outline: none !important;
+  cursor: pointer !important;
+  backdrop-filter: blur(8px) !important;
+  transition: 0.3s ease-in-out;
+}
+
+#google_translate_element select.goog-te-combo:hover {
+  background: rgba(46,125,50,0.3) !important;
+  border-color: rgba(76,175,80,0.8) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 10px rgba(76,175,80,0.6);
+}
+
+/* Hide Google Branding */
+.goog-logo-link,
+.goog-te-gadget span {
+  display: none !important;
+}
+
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+body { top: 0 !important; }
+
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 antialiased">
@@ -88,6 +122,8 @@
         <a href="projects.html" class="hover:text-green-200">Projects</a>
         <a href="#students" class="hover:text-green-200">Students' Works</a>
         <a href="contact.html" class="hover:text-green-200">Contact</a>
+        <div id="google_translate_element"></div>
+
       </div>
       <div class="md:hidden">
         <a href="index.html" class="px-3 py-2 rounded-full glass text-xs">Explore</a>
@@ -403,6 +439,20 @@
     select.dispatchEvent(new Event("change"));
   });
 </script>
+
+<!-- Google Translate Script -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,ta,hi,ml,te,kn',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
 </body>
 </html>
