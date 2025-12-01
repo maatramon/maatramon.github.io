@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -29,21 +29,40 @@
       backdrop-filter: blur(8px);
     }
 
-    #leafCanvas {
-      position: fixed;
-      inset: 0;
-      z-index: -10;
-      pointer-events: none;
+    /* Google Translate styles */
+    .goog-te-banner-frame {
+      display: none !important;
+    }
+    
+    .goog-te-gadget-simple {
+      background-color: transparent !important;
+      border: none !important;
+      font-size: 14px !important;
+    }
+    
+    .goog-te-menu-value {
+      color: white !important;
+    }
+    
+    .goog-te-menu-value span {
+      color: white !important;
+    }
+    
+    .goog-te-menu-value:hover {
+      color: #bbf7d0 !important;
+    }
+    
+    .skiptranslate iframe {
+      display: none !important;
+    }
+    
+    body {
+      top: 0 !important;
     }
   </style>
 </head>
 
-
-<div id="google_translate_element" class="mt-4"></div>
-
 <body class="bg-slate-900 text-white">
-
-<div id="google_translate_element" class="p-4 text-center"></div>
 
   <!-- NAVBAR -->
   <header class="py-5 px-6 sticky top-0 bg-slate-900/70 backdrop-blur-md z-50 border-b border-white/10">
@@ -65,7 +84,7 @@
   <section class="text-center py-16 px-6">
     <h1 class="text-4xl sm:text-5xl font-bold text-green-300">🌿 Our Trust Objectives</h1>
     <p class="max-w-2xl mx-auto mt-4 text-slate-300">
-      Highlighting our organisation’s core missions to uplift communities, empower individuals, 
+      Highlighting our organisation's core missions to uplift communities, empower individuals, 
       and protect nature.
     </p>
   </section>
@@ -120,7 +139,7 @@
 
         <div class="glass p-5 rounded-lg">
           <h4 class="font-semibold text-green-200">Women Empowerment Training</h4>
-          <p class="mt-2 text-slate-200 text-sm">Skill-building programs for women’s development.</p>
+          <p class="mt-2 text-slate-200 text-sm">Skill-building programs for women's development.</p>
         </div>
 
         <div class="glass p-5 rounded-lg">
@@ -254,136 +273,78 @@
   </div>
 
 </section>
-<!-- Floating Translate Button -->
-<!-- Floating Translate Button -->
+
+<!-- Fixed Translate Button -->
 <div id="translate-btn"
-     class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-xl cursor-pointer z-50 text-2xl">
+     class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-xl cursor-pointer z-50 text-2xl transition-all duration-300 hover:scale-110"
+     onclick="toggleTranslate()">
   🌍
 </div>
 
-<!-- Hidden Translate Popup -->
-<div id="translate-popup"
-     class="hidden fixed bottom-24 right-6 bg-slate-900 text-white p-4 rounded-xl shadow-2xl z-50 border border-white/10 w-48">
-  <div id="google_translate_element"></div>
+<!-- Translate Widget Container -->
+<div id="translate-container" class="hidden fixed bottom-24 right-6 z-50">
+  <div class="bg-slate-800 border border-green-500/30 rounded-xl shadow-2xl p-4">
+    <div id="google_translate_element"></div>
+  </div>
 </div>
-
 
   <!-- FOOTER -->
   <footer class="py-6 text-center text-slate-400 border-t border-white/10">
     © 2025 MAATRAM ON — Environmental & Social Trust
   </footer>
 
-  <!-- Leaf Animation Script -->
-  <script>
-    function leafParticles(){
-      const canvas = document.getElementById('leafCanvas');
-      const ctx = canvas.getContext('2d');
-      let W = canvas.width = innerWidth;
-      let H = canvas.height = innerHeight;
-
-      function leafSprite(size, hue=120){
-        const c = document.createElement('canvas');
-        c.width = c.height = size;
-        const cctx = c.getContext('2d');
-        cctx.translate(size/2, size/2);
-        cctx.fillStyle = `hsl(${hue} 40% 45%)`;
-
-        cctx.beginPath();
-        cctx.moveTo(0, -size*0.25);
-        cctx.quadraticCurveTo(size*0.4, -size*0.15, size*0.25, size*0.25);
-        cctx.quadraticCurveTo(0, size*0.4, -size*0.25, size*0.25);
-        cctx.quadraticCurveTo(-size*0.4, -size*0.15, 0, -size*0.25);
-        cctx.fill();
-        return c;
-      }
-
-      class Leaf{
-        constructor(){ this.reset(); }
-        reset(){
-          this.size = 10 + Math.random()*20;
-          this.x = Math.random()*W;
-          this.y = -20;
-          this.vx = -0.3 + Math.random()*0.6;
-          this.vy = 0.6 + Math.random()*1;
-          this.rot = Math.random()*Math.PI*2;
-          this.vr = (-0.01 + Math.random()*0.02);
-          this.sprite = leafSprite(this.size);
-        }
-        update(){
-          this.x += this.vx;
-          this.y += this.vy;
-          this.rot += this.vr;
-          if(this.y > H + 50) this.reset();
-        }
-        draw(){
-          ctx.save();
-          ctx.translate(this.x, this.y);
-          ctx.rotate(this.rot);
-          ctx.drawImage(this.sprite, -this.size/2, -this.size/2);
-          ctx.restore();
-        }
-      }
-
-      const leaves = [];
-      for(let i=0;i<60;i++) leaves.push(new Leaf());
-
-      function animate(){
-        ctx.clearRect(0,0,W,H);
-        for(const leaf of leaves){ leaf.update(); leaf.draw(); }
-        requestAnimationFrame(animate);
-      }
-      animate();
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        {
+          pageLanguage: 'en',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          autoDisplay: false,
+          includedLanguages: 'en,ta,hi,te,ml,kn,mr,gu,bn,pa,ur'
+        },
+        'google_translate_element'
+      );
+      
+      // Hide the Google branding
+      var style = document.createElement('style');
+      style.textContent = '.goog-te-gadget { font-family: inherit !important; }' +
+                         '.goog-te-gadget-simple { background-color: transparent !important; border: none !important; padding: 0 !important; }' +
+                         '.goog-te-menu-value { color: white !important; font-size: 14px !important; }' +
+                         '.goog-te-menu-value:hover { color: #bbf7d0 !important; }' +
+                         '.goog-te-menu-value span[dir="ltr"] { color: white !important; }' +
+                         '.goog-te-menu-value span[dir="ltr"]:hover { color: #bbf7d0 !important; }';
+      document.head.appendChild(style);
     }
-    leafParticles();
+    
+    function toggleTranslate() {
+      const container = document.getElementById('translate-container');
+      container.classList.toggle('hidden');
+      
+      // If showing, ensure Google Translate widget is loaded
+      if (!container.classList.contains('hidden')) {
+        if (!document.querySelector('.goog-te-gadget')) {
+          // Reload the translate widget if it's not present
+          googleTranslateElementInit();
+        }
+      }
+    }
+    
+    // Close translate widget when clicking outside
+    document.addEventListener('click', function(event) {
+      const container = document.getElementById('translate-container');
+      const button = document.getElementById('translate-btn');
+      
+      if (!container.contains(event.target) && !button.contains(event.target)) {
+        container.classList.add('hidden');
+      }
+    });
   </script>
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement(
-      {pageLanguage: 'en'},
-      'google_translate_element'
-    );
-  }
-</script>
 
-<script type="text/javascript" 
-  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-</script>
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement(
-      {pageLanguage: 'en'},
-      'google_translate_element'
-    );
-  }
-</script>
-
-<script type="text/javascript"
-  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-</script>
-
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement(
-      {pageLanguage: 'en'},
-      'google_translate_element'
-    );
-  }
-</script>
-
-<script type="text/javascript"
-  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-</script>
-
-<script>
-  const btn = document.getElementById("translate-btn");
-  const box = document.getElementById("translate-box");
-
-  btn.addEventListener("click", () => {
-    box.classList.toggle("hidden");
-  });
-</script>
-
-</script>
+  <!-- Google Translate API -->
+  <script type="text/javascript" 
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
 
 </body>
 </html>
