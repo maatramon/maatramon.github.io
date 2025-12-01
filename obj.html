@@ -21,114 +21,84 @@
       }
     };
   </script>
+
+  <style>
+    .glass {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    /* Google Translate styles */
+    .goog-te-banner-frame {
+      display: none !important;
+    }
+    
+    .skiptranslate iframe {
+      display: none !important;
+    }
+    
+    body {
+      top: 0 !important;
+    }
+    
+    /* Style the Google Translate dropdown */
+    .goog-te-gadget {
+      font-family: inherit !important;
+    }
+    
+    .goog-te-gadget-simple {
+      background-color: transparent !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      padding: 6px 10px !important;
+      border-radius: 6px !important;
+      font-size: 14px !important;
+      cursor: pointer !important;
+    }
+    
+    .goog-te-menu-value {
+      color: white !important;
+    }
+    
+    .goog-te-menu-value span {
+      color: white !important;
+    }
+    
+    .goog-te-menu-value:hover {
+      color: #bbf7d0 !important;
+    }
+    
+    .goog-te-menu-value span:hover {
+      color: #bbf7d0 !important;
+    }
+    
+    .goog-te-gadget img {
+      display: none !important;
+    }
+    
+    /* Hide the "Powered by Google" text */
+    .goog-logo-link {
+      display: none !important;
+    }
+    
+    .goog-te-gadget .goog-te-combo {
+      margin: 0 !important;
+      padding: 4px !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+      color: white !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      border-radius: 4px !important;
+    }
+    
+    /* Style the dropdown options */
+    .goog-te-combo option {
+      background: #1e293b !important;
+      color: white !important;
+    }
+  </style>
 </head>
-<style>
-:root {
-  --bg-dark: #0f1724;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: var(--bg-dark);
-}
-
-.glass {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  backdrop-filter: blur(8px);
-}
-
-/* Translate Button Styles */
-.translate-option-btn {
-  width: 100%;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: all 0.3s ease;
-  text-align: center;
-  margin-bottom: 8px;
-}
-
-.tamil-btn {
-  background: linear-gradient(135deg, #2e7d32, #1b5e20);
-  color: white;
-}
-.tamil-btn:hover {
-  background: linear-gradient(135deg, #1b5e20, #2e7d32);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(46,125,50,0.3);
-}
-
-.english-btn {
-  background: linear-gradient(135deg, #4b5563, #374151);
-  color: white;
-}
-.english-btn:hover {
-  background: linear-gradient(135deg, #374151, #4b5563);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(75,85,99,0.3);
-}
-
-/* --------------------------------------------------
-   GOOGLE TRANSLATE FIX — WORKING VERSION
--------------------------------------------------- */
-
-/* Hidden container but functional engine */
-#google_translate_element {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-  height: 0;
-  overflow: hidden;
-}
-
-/* Remove the top Google bar */
-.goog-te-banner-frame {
-  display: none !important;
-}
-body {
-  top: 0 !important;
-}
-
-/* Hide branding, iframe, icons */
-.goog-te-gadget,
-.goog-te-gadget-simple,
-.goog-te-menu-value,
-.goog-te-menu-value span,
-.goog-te-gadget img {
-  display: none !important;
-  opacity: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
-}
-
-/* ⚠️ MOST IMPORTANT:
-   Keep .goog-te-combo ALIVE in DOM but INVISIBLE
--------------------------------------------------- */
-.goog-te-combo {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  position: absolute !important;
-  pointer-events: none !important;
-  height: 0 !important;
-}
-
-/* --------------------------------------------------
-   RESPONSIVE FIXES
--------------------------------------------------- */
-@media (max-width: 640px) {
-  #introVideo { object-position: center top; }
-}
-</style>
 
 <body class="bg-slate-900 text-white">
-
-  <!-- Google Translate Element - Hidden initially -->
-  <div id="google_translate_element"></div>
 
   <!-- NAVBAR -->
   <header class="py-5 px-6 sticky top-0 bg-slate-900/70 backdrop-blur-md z-50 border-b border-white/10">
@@ -138,10 +108,13 @@ body {
         <span class="font-bold text-lg">MAATRAM ON</span>
       </a>
 
-      <nav class="hidden md:flex gap-6 text-sm">
+      <nav class="hidden md:flex gap-6 text-sm items-center">
         <a href="index.html" class="hover:text-green-300">Home</a>
         <a href="projects.html" class="hover:text-green-300">Projects</a>
         <a href="objective.html" class="text-green-300">Objectives</a>
+        
+        <!-- Google Translate Widget -->
+        <div id="google_translate_element" class="ml-4"></div>
       </nav>
     </div>
   </header>
@@ -340,108 +313,38 @@ body {
 
 </section>
 
-<!-- Fixed Translate Button -->
-<div id="translate-btn"
-     class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-xl cursor-pointer z-50 text-2xl transition-all duration-300 hover:scale-110"
-     onclick="toggleTranslateMenu()">
-  🌍
-</div>
-
-<!-- Translate Options Container -->
-<div id="translate-menu" class="hidden fixed bottom-24 right-6 z-50">
-  <div class="bg-slate-800 border border-green-500/30 rounded-xl shadow-2xl p-4 flex flex-col w-48">
-    <button class="translate-option-btn tamil-btn" onclick="translateToTamil()">
-      தமிழ் (Tamil)
-    </button>
-    <button class="translate-option-btn english-btn" onclick="translateToEnglish()">
-      English
-    </button>
-  </div>
-</div>
-
   <!-- FOOTER -->
   <footer class="py-6 text-center text-slate-400 border-t border-white/10">
     © 2025 MAATRAM ON — Environmental & Social Trust
   </footer>
 
-<script>
-/* -------------------------------------------------------
-   1) LOAD GOOGLE TRANSLATE
-------------------------------------------------------- */
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: "en",
-    includedLanguages: "en,ta",
-    autoDisplay: false
-  }, "google_translate_element");
-}
-
-function loadGoogleTranslate() {
-  const script = document.createElement("script");
-  script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-  script.async = true;
-  document.body.appendChild(script);
-}
-
-// Load translator on page load
-window.addEventListener("load", loadGoogleTranslate);
-
-
-/* -------------------------------------------------------
-   2) MENU TOGGLE
-------------------------------------------------------- */
-function toggleTranslateMenu() {
-  document.getElementById("translate-menu").classList.toggle("hidden");
-}
-
-
-/* -------------------------------------------------------
-   3) TRANSLATE TO TAMIL
-------------------------------------------------------- */
-function translateToTamil() {
-  // wait for Google Translate dropdown to load
-  setTimeout(() => {
-    const combo = document.querySelector(".goog-te-combo");
-    if (combo) {
-      combo.value = "ta";
-      combo.dispatchEvent(new Event("change"));
-      document.getElementById("translate-btn").textContent = "🇮🇳";
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        // You can specify which languages to show
+        includedLanguages: 'en,ta,hi,te,ml,kn',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+      
+      // Hide the Google branding
+      var style = document.createElement('style');
+      style.textContent = '.goog-te-gadget { font-family: inherit !important; }' +
+                         '.goog-te-gadget-simple { background-color: transparent !important; border: 1px solid rgba(255,255,255,0.2) !important; padding: 6px 10px !important; }' +
+                         '.goog-te-menu-value { color: white !important; font-size: 14px !important; }' +
+                         '.goog-te-menu-value:hover { color: #bbf7d0 !important; }' +
+                         '.goog-te-menu-value span[dir="ltr"] { color: white !important; }' +
+                         '.goog-te-menu-value span[dir="ltr"]:hover { color: #bbf7d0 !important; }';
+      document.head.appendChild(style);
     }
-  }, 500);
+  </script>
 
-  toggleTranslateMenu();
-}
-
-
-/* -------------------------------------------------------
-   4) TRANSLATE TO ENGLISH
-------------------------------------------------------- */
-function translateToEnglish() {
-  setTimeout(() => {
-    const combo = document.querySelector(".goog-te-combo");
-    if (combo) {
-      combo.value = "en";
-      combo.dispatchEvent(new Event("change"));
-      document.getElementById("translate-btn").textContent = "🌍";
-    }
-  }, 500);
-
-  toggleTranslateMenu();
-}
-
-
-/* -------------------------------------------------------
-   5) CLOSE MENU WHEN CLICKED OUTSIDE
-------------------------------------------------------- */
-document.addEventListener("click", (event) => {
-  const menu = document.getElementById("translate-menu");
-  const btn = document.getElementById("translate-btn");
-
-  if (!menu.contains(event.target) && !btn.contains(event.target)) {
-    menu.classList.add("hidden");
-  }
-});
-</script>
+  <!-- Google Translate API -->
+  <script type="text/javascript" 
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
 
 </body>
 </html>
