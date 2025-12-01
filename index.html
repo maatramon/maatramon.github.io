@@ -207,6 +207,43 @@
   display: none !important;
 }
 body { top: 0 !important; }
+/* -------------------------------
+   BEAUTIFUL CUSTOM TRANSLATE BOX
+--------------------------------*/
+#google_translate_element select.goog-te-combo {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  padding: 10px 14px !important;
+  font-size: 15px !important;
+  color: #e0ffe0 !important;
+  border-radius: 10px !important;
+  outline: none !important;
+  cursor: pointer !important;
+  transition: 0.3s ease-in-out;
+  backdrop-filter: blur(8px) !important;
+}
+
+#google_translate_element select.goog-te-combo:hover {
+  background: rgba(46, 125, 50, 0.3) !important;
+  border-color: rgba(76, 175, 80, 0.9) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(76, 175, 80, 0.6);
+}
+
+/* Remove Google Branding */
+.goog-logo-link, .goog-te-gadget span {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  color: transparent !important;
+}
+
+/* Hide top bar */
+.goog-te-banner-frame {
+  display: none !important;
+}
+body { top: 0 !important; }
 
   </style>
 </head>
