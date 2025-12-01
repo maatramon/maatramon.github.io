@@ -21,97 +21,114 @@
       }
     };
   </script>
-
-  <style>
-    .glass {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(8px);
-    }
-
-    /* Google Translate styles */
-    .goog-te-banner-frame {
-      display: none !important;
-    }
-    
-    .skiptranslate iframe {
-      display: none !important;
-    }
-    
-    body {
-      top: 0 !important;
-    }
-    
-    /* Hide all Google Translate elements except the actual translated text */
-    .goog-te-gadget {
-      font-size: 0 !important;
-    }
-    
-    .goog-te-gadget-simple {
-      background-color: transparent !important;
-      border: none !important;
-      padding: 0 !important;
-      font-size: 0 !important;
-      line-height: 0 !important;
-    }
-    
-    .goog-te-menu-value {
-      display: none !important;
-    }
-    
-    .goog-te-menu-value span {
-      display: none !important;
-    }
-    
-    .goog-te-gadget img {
-      display: none !important;
-    }
-    
-    .goog-te-gadget .goog-te-combo {
-      display: none !important;
-    }
-    
-    /* Style for buttons */
-    .translate-option-btn {
-      width: 100%;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all 0.3s ease;
-      text-align: center;
-      margin-bottom: 8px;
-    }
-    
-    .tamil-btn {
-      background: linear-gradient(135deg, #2e7d32, #1b5e20);
-      color: white;
-    }
-    
-    .tamil-btn:hover {
-      background: linear-gradient(135deg, #1b5e20, #2e7d32);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
-    }
-    
-    .english-btn {
-      background: linear-gradient(135deg, #4b5563, #374151);
-      color: white;
-    }
-    
-    .english-btn:hover {
-      background: linear-gradient(135deg, #374151, #4b5563);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(75, 85, 99, 0.3);
-    }
-  </style>
 </head>
+<style>
+:root {
+  --bg-dark: #0f1724;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg-dark);
+}
+
+.glass {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+}
+
+/* Translate Button Styles */
+.translate-option-btn {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.tamil-btn {
+  background: linear-gradient(135deg, #2e7d32, #1b5e20);
+  color: white;
+}
+.tamil-btn:hover {
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(46,125,50,0.3);
+}
+
+.english-btn {
+  background: linear-gradient(135deg, #4b5563, #374151);
+  color: white;
+}
+.english-btn:hover {
+  background: linear-gradient(135deg, #374151, #4b5563);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(75,85,99,0.3);
+}
+
+/* --------------------------------------------------
+   GOOGLE TRANSLATE FIX — WORKING VERSION
+-------------------------------------------------- */
+
+/* Hidden container but functional engine */
+#google_translate_element {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Remove the top Google bar */
+.goog-te-banner-frame {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+}
+
+/* Hide branding, iframe, icons */
+.goog-te-gadget,
+.goog-te-gadget-simple,
+.goog-te-menu-value,
+.goog-te-menu-value span,
+.goog-te-gadget img {
+  display: none !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* ⚠️ MOST IMPORTANT:
+   Keep .goog-te-combo ALIVE in DOM but INVISIBLE
+-------------------------------------------------- */
+.goog-te-combo {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  pointer-events: none !important;
+  height: 0 !important;
+}
+
+/* --------------------------------------------------
+   RESPONSIVE FIXES
+-------------------------------------------------- */
+@media (max-width: 640px) {
+  #introVideo { object-position: center top; }
+}
+</style>
 
 <body class="bg-slate-900 text-white">
 
   <!-- Google Translate Element - Hidden initially -->
-  <div id="google_translate_element" style="display: none;"></div>
+  <div id="google_translate_element"></div>
 
   <!-- NAVBAR -->
   <header class="py-5 px-6 sticky top-0 bg-slate-900/70 backdrop-blur-md z-50 border-b border-white/10">
@@ -347,122 +364,84 @@
     © 2025 MAATRAM ON — Environmental & Social Trust
   </footer>
 
-  <!-- Google Translate Script -->
-  <script type="text/javascript">
-    // Initialize Google Translate
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'en,ta', // Only English and Tamil
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-    
-    // Load Google Translate script
-    function loadGoogleTranslate() {
-      if (!window.google || !window.google.translate) {
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-        document.body.appendChild(script);
-      }
-    }
-    
-    // Call this on page load
-    window.onload = function() {
-      loadGoogleTranslate();
-    };
-    
-    let isTranslatedToTamil = false;
-    
-    function toggleTranslateMenu() {
-      const menu = document.getElementById('translate-menu');
-      menu.classList.toggle('hidden');
-    }
-    
-    function translateToTamil() {
-      if (!isTranslatedToTamil) {
-        // First ensure Google Translate is loaded
-        if (!window.google || !window.google.translate) {
-          loadGoogleTranslate();
-          setTimeout(() => {
-            performTamilTranslation();
-          }, 1000);
-        } else {
-          performTamilTranslation();
-        }
-      }
-      toggleTranslateMenu();
-    }
-    
-    function performTamilTranslation() {
-      // Show the Google Translate element
-      const translateElement = document.getElementById('google_translate_element');
-      translateElement.style.display = 'block';
-      
-      // Find the Google Translate select dropdown
-      const selectElement = document.querySelector('.goog-te-combo');
-      if (selectElement) {
-        // Set to Tamil
-        selectElement.value = 'ta';
-        // Trigger change event
-        selectElement.dispatchEvent(new Event('change'));
-      }
-      
-      isTranslatedToTamil = true;
-      document.getElementById('translate-btn').textContent = '🇮🇳';
-    }
-    
-    function translateToEnglish() {
-      if (isTranslatedToTamil) {
-        // Find the Google Translate select dropdown
-        const selectElement = document.querySelector('.goog-te-combo');
-        if (selectElement) {
-          // Set back to English
-          selectElement.value = 'en';
-          // Trigger change event
-          selectElement.dispatchEvent(new Event('change'));
-        }
-        
-        isTranslatedToTamil = false;
-        document.getElementById('translate-btn').textContent = '🌍';
-      }
-      toggleTranslateMenu();
-    }
-    
-    // Close translate menu when clicking outside
-    document.addEventListener('click', function(event) {
-      const menu = document.getElementById('translate-menu');
-      const button = document.getElementById('translate-btn');
-      
-      if (!menu.contains(event.target) && !button.contains(event.target)) {
-        menu.classList.add('hidden');
-      }
-    });
-    
-    // Alternative method using Google Translate API directly
-    function translateToTamilDirect() {
-      // Create a temporary iframe for translation
-      const translateFrame = document.createElement('iframe');
-      translateFrame.style.display = 'none';
-      translateFrame.src = `https://translate.google.com/translate?hl=en&sl=en&tl=ta&u=${encodeURIComponent(window.location.href)}`;
-      document.body.appendChild(translateFrame);
-    }
-  </script>
+<script>
+/* -------------------------------------------------------
+   1) LOAD GOOGLE TRANSLATE
+------------------------------------------------------- */
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: "en",
+    includedLanguages: "en,ta",
+    autoDisplay: false
+  }, "google_translate_element");
+}
 
-  <!-- Alternative: Use Google Translate API directly -->
-  <script>
-    // This is an alternative approach using cookies to set language
-    function setLanguageCookie(language) {
-      document.cookie = `googtrans=/en/${language}; path=/`;
-      location.reload();
+function loadGoogleTranslate() {
+  const script = document.createElement("script");
+  script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+  script.async = true;
+  document.body.appendChild(script);
+}
+
+// Load translator on page load
+window.addEventListener("load", loadGoogleTranslate);
+
+
+/* -------------------------------------------------------
+   2) MENU TOGGLE
+------------------------------------------------------- */
+function toggleTranslateMenu() {
+  document.getElementById("translate-menu").classList.toggle("hidden");
+}
+
+
+/* -------------------------------------------------------
+   3) TRANSLATE TO TAMIL
+------------------------------------------------------- */
+function translateToTamil() {
+  // wait for Google Translate dropdown to load
+  setTimeout(() => {
+    const combo = document.querySelector(".goog-te-combo");
+    if (combo) {
+      combo.value = "ta";
+      combo.dispatchEvent(new Event("change"));
+      document.getElementById("translate-btn").textContent = "🇮🇳";
     }
-    
-    // You can also use this approach:
-    // When clicking Tamil button: setLanguageCookie('ta');
-    // When clicking English button: setLanguageCookie('en');
-  </script>
+  }, 500);
+
+  toggleTranslateMenu();
+}
+
+
+/* -------------------------------------------------------
+   4) TRANSLATE TO ENGLISH
+------------------------------------------------------- */
+function translateToEnglish() {
+  setTimeout(() => {
+    const combo = document.querySelector(".goog-te-combo");
+    if (combo) {
+      combo.value = "en";
+      combo.dispatchEvent(new Event("change"));
+      document.getElementById("translate-btn").textContent = "🌍";
+    }
+  }, 500);
+
+  toggleTranslateMenu();
+}
+
+
+/* -------------------------------------------------------
+   5) CLOSE MENU WHEN CLICKED OUTSIDE
+------------------------------------------------------- */
+document.addEventListener("click", (event) => {
+  const menu = document.getElementById("translate-menu");
+  const btn = document.getElementById("translate-btn");
+
+  if (!menu.contains(event.target) && !btn.contains(event.target)) {
+    menu.classList.add("hidden");
+  }
+});
+</script>
 
 </body>
 </html>
