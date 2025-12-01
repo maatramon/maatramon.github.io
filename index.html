@@ -28,7 +28,11 @@
       --bg-dark: #0f1724;
     }
 
-    html,body { height:100%; margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: var(--bg-dark); }
+    html,body {
+      height:100%; margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg-dark);
+    }
 
     /* Intro video container */
     #introVideoContainer {
@@ -52,7 +56,7 @@
       position: fixed;
       inset: 0;
       z-index: -20;
-      background-image: url('bg-after.jpg'); /* replace with your static background image */
+      background-image: url('bg-after.jpg');
       background-size: cover;
       background-position: center;
       filter: brightness(0.65);
@@ -60,7 +64,7 @@
       transition: opacity 1s ease-in-out;
     }
 
-    /* Light beams (hidden by default) */
+    /* Light beams */
     .light-beams {
       position: fixed;
       inset: 0;
@@ -94,14 +98,12 @@
     #pageContent { opacity: 0; transform: translateY(28px); transition: opacity 1.2s ease-out, transform 1.2s ease-out; }
     .page-visible { opacity: 1 !important; transform: translateY(0) !important; }
 
-    /* Stagger reveal items */
-    .reveal-item { opacity: 0; transform: translateY(18px); transition: opacity 0.9s ease-out, transform 0.9s ease-out; }
+    /* Reveal items */
+    .reveal-item { opacity: 0; transform: translateY(18px); transition: 0.9s ease-out; }
     .reveal-show { opacity: 1 !important; transform: translateY(0) !important; }
 
-    /* small helper */
     .shadow-soft { box-shadow: 0 8px 30px rgba(2,8,6,0.6); }
 
-    /* Buttons glow */
     .glow-btn {
       box-shadow: 0 0 12px rgba(46,125,50,0.45);
       transition: box-shadow .28s ease, transform .18s ease;
@@ -111,171 +113,73 @@
       transform: translateY(-2px);
     }
 
-    /* Google Translate styles */
-    .goog-te-banner-frame {
-      display: none !important;
-    }
-    
-    .skiptranslate iframe {
-      display: none !important;
-    }
-    
-    body {
-      top: 0 !important;
-    }
-    
-    /* Style the Google Translate dropdown */
-    .goog-te-gadget {
-      font-family: inherit !important;
-    }
-    
-    .goog-te-gadget-simple {
-      background-color: transparent !important;
-      border: 1px solid rgba(255, 255, 255, 0.2) !important;
-      padding: 6px 10px !important;
-      border-radius: 6px !important;
-      font-size: 14px !important;
+    /* -------------------------------------------
+       PREMIUM DECORATED GOOGLE TRANSLATE DROPDOWN
+       ------------------------------------------- */
+    #google_translate_element select.goog-te-combo {
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      padding: 10px 14px !important;
+      font-size: 15px !important;
+      color: #e0ffe0 !important;
+      border-radius: 10px !important;
+      outline: none !important;
       cursor: pointer !important;
+      transition: 0.3s ease-in-out;
+      backdrop-filter: blur(8px) !important;
     }
-    
-    .goog-te-menu-value {
-      color: white !important;
+
+    #google_translate_element select.goog-te-combo:hover {
+      background: rgba(46, 125, 50, 0.3) !important;
+      border-color: rgba(76, 175, 80, 0.9) !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 12px rgba(76, 175, 80, 0.6);
     }
-    
-    .goog-te-menu-value span {
-      color: white !important;
-    }
-    
-    .goog-te-menu-value:hover {
-      color: #bbf7d0 !important;
-    }
-    
-    .goog-te-menu-value span:hover {
-      color: #bbf7d0 !important;
-    }
-    
-    .goog-te-gadget img {
+
+    /* Remove Google Branding */
+    .goog-logo-link,
+    .goog-te-gadget span {
       display: none !important;
     }
-    
-    /* Hide the "Powered by Google" text */
-    .goog-logo-link {
-      display: none !important;
-    }
-    
-    .goog-te-gadget .goog-te-combo {
-      margin: 0 !important;
-      padding: 4px !important;
-      background: rgba(255, 255, 255, 0.1) !important;
-      color: white !important;
-      border: 1px solid rgba(255, 255, 255, 0.2) !important;
-      border-radius: 4px !important;
-    }
-    
-    /* Style the dropdown options */
-    .goog-te-combo option {
-      background: #1e293b !important;
-      color: white !important;
+    .goog-te-gadget {
+      color: transparent !important;
     }
 
-    /* Responsive tweaks */
-    @media (max-width: 640px) {
-      #introVideo { object-position: center top; }
-      .hero-overlay { background: linear-gradient(180deg, rgba(8,40,20,0.45), rgba(2,8,6,0.7)); }
-      /* Hide Google Translate on mobile to save space */
-      .goog-te-gadget-simple {
-        display: none !important;
-      }
-    }
-
-    /* footer small */
-    footer { background: rgba(3,7,11,0.6); }
-
-    /* Floating Translate Globe */
-#translateGlobe {
-  animation: floatGlobe 3s infinite ease-in-out;
-}
-
-@keyframes floatGlobe {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(0px); }
-}
-
-/* Hide Google bar */
-.goog-te-banner-frame {
-  display: none !important;
-}
-body { top: 0 !important; }
-/* -------------------------------
-   BEAUTIFUL CUSTOM TRANSLATE BOX
---------------------------------*/
-#google_translate_element select.goog-te-combo {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  padding: 10px 14px !important;
-  font-size: 15px !important;
-  color: #e0ffe0 !important;
-  border-radius: 10px !important;
-  outline: none !important;
-  cursor: pointer !important;
-  transition: 0.3s ease-in-out;
-  backdrop-filter: blur(8px) !important;
-}
-
-#google_translate_element select.goog-te-combo:hover {
-  background: rgba(46, 125, 50, 0.3) !important;
-  border-color: rgba(76, 175, 80, 0.9) !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 12px rgba(76, 175, 80, 0.6);
-}
-
-/* Remove Google Branding */
-.goog-logo-link, .goog-te-gadget span {
-  display: none !important;
-}
-
-.goog-te-gadget {
-  color: transparent !important;
-}
-
-/* Hide top bar */
-.goog-te-banner-frame {
-  display: none !important;
-}
-body { top: 0 !important; }
+    .goog-te-banner-frame { display: none !important; }
+    body { top: 0 !important; }
 
   </style>
 </head>
+
 <body class="antialiased text-slate-100">
 
-  <!-- Background image (shown after intro) -->
-  <div id="bgAfter" aria-hidden="true"></div>
+  <!-- Background after intro -->
+  <div id="bgAfter"></div>
 
   <!-- Light beams -->
-  <div class="light-beams pointer-events-none" aria-hidden="true"></div>
+  <div class="light-beams"></div>
 
-  <!-- Intro video -->
-  <div id="introVideoContainer" role="presentation" aria-hidden="false">
+  <!-- Intro Video -->
+  <div id="introVideoContainer">
     <video id="introVideo" autoplay muted playsinline>
       <source src="intro1.mp4" type="video/mp4">
-      Your browser does not support the video tag.
     </video>
 
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-center z-50 pointer-events-none">
-      <img src="logo.jpeg" alt="MAATRAM ON logo" class="w-20 h-20 rounded-full border-2 border-white/20 mx-auto shadow-lg" />
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
+      <img src="logo.jpeg" class="w-20 h-20 rounded-full border-2 border-white/20 mx-auto shadow-lg" />
       <p class="mt-2 text-sm text-green-100/80">MAATRAM ON — Change for Nature</p>
     </div>
   </div>
 
-  <!-- Main page content (hidden at first) -->
+  <!-- Page Content -->
   <div id="pageContent" class="relative z-10">
 
     <!-- NAVBAR -->
     <header class="fixed top-4 left-0 right-0 z-50 px-4 sm:px-8">
       <nav class="max-w-6xl mx-auto flex items-center justify-between glass px-4 py-2 rounded-full shadow-soft">
+        
         <a href="#" class="flex items-center gap-3">
-          <img src="logo.jpeg" alt="logo" class="w-12 h-12 rounded-full border-2 border-white/20" />
+          <img src="logo.jpeg" class="w-12 h-12 rounded-full border-2 border-white/20" />
           <div class="hidden sm:block">
             <div class="font-bold text-white">MAATRAM ON</div>
             <div class="text-xs text-green-200">Environmental Trust</div>
@@ -288,9 +192,9 @@ body { top: 0 !important; }
           <a href="student.html" class="hover:text-green-200 reveal-item">Student</a>
           <a href="contact.html" class="hover:text-green-200 reveal-item">Contact</a>
           <a href="obj.html" class="hover:text-green-200 reveal-item">Objectives</a>
-          
-          <!-- Google Translate Widget -->
-          <div id="google_translate_element" class="ml-4 reveal-item"></div>
+
+          <!-- PREMIUM GOOGLE TRANSLATE DROPDOWN -->
+          <div id="google_translate_element" class="ml-4"></div>
         </div>
       </nav>
     </header>
@@ -560,7 +464,11 @@ body { top: 0 !important; }
 
   </div> <!-- end pageContent -->
 <!-- 🌐 Floating Google Translate Globe -->
-
+<div id="translateGlobe"
+     class="fixed bottom-6 right-6 z-50 w-14 h-14 flex items-center justify-center 
+            bg-green-600 hover:bg-green-700 text-white rounded-full shadow-xl cursor-pointer">
+  <span class="text-2xl">🌐</span>
+</div>
 
   <!-- Scripts -->
   <script>
@@ -754,50 +662,19 @@ body { top: 0 !important; }
   </script>
 
   <!-- Google Translate Script -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        // You can specify which languages to show
-        includedLanguages: 'en,ta,hi,te,ml,kn',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-      
-      // Style the Google Translate widget to match your theme
-      var style = document.createElement('style');
-      style.textContent = '.goog-te-gadget { font-family: inherit !important; }' +
-                         '.goog-te-gadget-simple { background-color: transparent !important; border: 1px solid rgba(255,255,255,0.2) !important; padding: 6px 10px !important; border-radius: 6px !important; }' +
-                         '.goog-te-menu-value { color: white !important; font-size: 14px !important; }' +
-                         '.goog-te-menu-value:hover { color: #bbf7d0 !important; }' +
-                         '.goog-te-menu-value span[dir="ltr"] { color: white !important; }' +
-                         '.goog-te-menu-value span[dir="ltr"]:hover { color: #bbf7d0 !important; }';
-      document.head.appendChild(style);
-    }
-  </script>
-
-  <!-- Google Translate API -->
-  <script type="text/javascript" 
-    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-  </script>
-<script>
-  // Toggle Translate Box
-  document.getElementById("translateGlobe").addEventListener("click", () => {
-    document.getElementById("translateBox").classList.toggle("hidden");
-  });
-
-  // Google Translate Init
-  function googleTranslateElementInit2() {
+<script type="text/javascript">
+  function googleTranslateElementInit() {
     new google.translate.TranslateElement({
       pageLanguage: 'en',
       includedLanguages: 'en,ta,hi,ml,te,kn',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element2');
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
   }
 </script>
 
 <!-- Google Translate API -->
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit2"></script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
